@@ -2,12 +2,14 @@
 
 # Class: 2021 AW1 M-Z
 
-## Team name: TEAM_NAME
+## Team name: CodingInTheShadows
+
 Team members:
-* s123456 LASTNAME FIRSTNAME
-* s123456 LASTNAME FIRSTNAME 
-* s123456 LASTNAME FIRSTNAME
-* s123456 LASTNAME FIRSTNAME (delete line if not needed)
+
+* s290144 Rege Cambrin Daniele
+* s123456 Natta Tommaso 
+* s123456 Orlando Luca
+* s123456 Marsiano Jonathan
 
 ## Instructions
 
