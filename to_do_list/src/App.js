@@ -1,14 +1,4 @@
-/*<<<<<<< Updated upstream
-import logo from "./logo.svg";
-import "./App.css";
-=======
 
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Container, Row, Button, ListGroup, Navbar } from 'react-bootstrap';
->>>>>>> Stashed changes
-*/
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
