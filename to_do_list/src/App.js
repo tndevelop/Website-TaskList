@@ -16,17 +16,14 @@ function App() {
       <h1 id="selectedFilter">
         <b>Filter</b>: all
       </h1>
-      <ListGroup variant="flush" className="list-group-flush">
+      <ListGroup variant="flush">
         {/* Task 1 */}
         <ListGroup.Item>
           <Row>
-            <Form.Group as={Col} controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Study for the exam"
-                inline="true"
-              />
-            </Form.Group>
+            <Col>
+              <Form.Check type="checkbox" label="Study for the exam" />
+            </Col>
+
             <Col sm="auto">
               <Pencil className="pencil"></Pencil>
             </Col>
@@ -39,19 +36,17 @@ function App() {
         {/* Taks2 */}
         <ListGroup.Item>
           <Row>
-            <Form.Group as={Col} controlId="formBasicCheckbox">
+            <Col>
               <Form.Check
                 type="checkbox"
                 label="Prepare the slides for the exam"
               />
-            </Form.Group>
+            </Col>
             <Col sm="2">
               <PersonSquare></PersonSquare>
             </Col>
 
-            <Col>
-              <p size="sm">Saturday, June 20th 2020, 12:00:00 am</p>
-            </Col>
+            <Col>Saturday, June 20th 2020, 12:00:00 am</Col>
 
             <Col sm="auto">
               <Pencil className="pencil"></Pencil>
@@ -65,9 +60,9 @@ function App() {
         {/* Task 3 */}
         <ListGroup.Item>
           <Row>
-            <Form.Group as={Col} controlId="formBasicCheckbox">
+            <Col>
               <Form.Check type="checkbox" label="Call Mary" />
-            </Form.Group>
+            </Col>
 
             <Col sm="auto">
               <Pencil className="pencil"></Pencil>
