@@ -7,7 +7,7 @@
 Team members:
 
 * s290144 Rege Cambrin Daniele
-* s123456 Natta Tommaso 
+* s282478 Natta Tommaso 
 * s281933 Orlando Luca
 * s281879 Marsiano Jonathan
 
