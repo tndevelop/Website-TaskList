@@ -1,14 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import { Form, ListGroup, Container, Col, Row, Image } from "react-bootstrap";
-import {
-  Pencil,
-  PersonSquare,
-  Trash,
-  PlusCircleFill,
-} from "react-bootstrap-icons";
+import { PersonSquare } from "react-bootstrap-icons";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import "./App.css";
-import { ReactComponent as PlusButton } from "./add.svg";
 
 function App() {
   return (
@@ -25,11 +21,11 @@ function App() {
             </Col>
 
             <Col sm="auto">
-              <Pencil className="pencil"></Pencil>
+              <FaPencilAlt className="pencil"></FaPencilAlt>
             </Col>
 
             <Col sm={0.5}>
-              <Trash className="trash"></Trash>
+              <FaTrashAlt className="trash"></FaTrashAlt>
             </Col>
           </Row>
         </ListGroup.Item>
@@ -49,11 +45,11 @@ function App() {
             <Col>Saturday, June 20th 2020, 12:00:00 am</Col>
 
             <Col sm="auto">
-              <Pencil className="pencil"></Pencil>
+              <FaPencilAlt className="pencil"></FaPencilAlt>
             </Col>
 
             <Col sm="0.5">
-              <Trash className="trash"></Trash>
+              <FaTrashAlt className="trash"></FaTrashAlt>
             </Col>
           </Row>
         </ListGroup.Item>
@@ -65,18 +61,18 @@ function App() {
             </Col>
 
             <Col sm="auto">
-              <Pencil className="pencil"></Pencil>
+              <FaPencilAlt className="pencil"></FaPencilAlt>
             </Col>
 
             <Col sm={0.5}>
-              <Trash className="trash"></Trash>
+              <FaTrashAlt className="trash"></FaTrashAlt>
             </Col>
           </Row>
         </ListGroup.Item>
       </ListGroup>
       {/* Bottom plus */}
 
-      <PlusCircleFill className="plusButton" color="green"></PlusCircleFill>
+      <AiFillPlusCircle className="plusButton" color="green"></AiFillPlusCircle>
     </Container>
   );
 }
