@@ -1,3 +1,4 @@
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row, Button, Navbar, Form, ListGroup } from "react-bootstrap";
 import FormControl from 'react-bootstrap/FormControl'
@@ -11,8 +12,32 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  return (    
+  return (
     <Container fluid>
+      <Navbar bg="success" variant="dark" className="justify-content-between">
+
+        <Navbar.Brand href="index.html">
+          <BsCheckAll></BsCheckAll> ToDo Manager
+</Navbar.Brand>
+
+
+
+        <Form className="form-inline my-2 my-lg-0 mx-auto d-none d-sm-block" action="#" role="search" aria-label="Quick search">
+          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+        </Form>
+
+
+        <a className="nav-item nav-link" href="#">
+          <IconContext.Provider value={{ size: "2em" }}>
+            <div>
+              <BiUserCircle></BiUserCircle>
+            </div>
+          </IconContext.Provider>
+        </a>
+
+      </Navbar>
+
+
       <Row className="vheight-100">
         <Col sm={4} xs={12} className="bg-light below-nav d-sm-block collapse" id="left-sidebar">
           <ListGroup variant="flush">
@@ -21,8 +46,8 @@ function App() {
             <ListGroup.Item action href="#">Today</ListGroup.Item>
             <ListGroup.Item action href="#">Next 7 Days</ListGroup.Item>
             <ListGroup.Item action href="#">Private</ListGroup.Item>
-          </ListGroup> 
-          
+          </ListGroup>
+
         </Col>
       </Row>
       <Row>Navn</Row>
@@ -98,6 +123,7 @@ function App() {
         </Col>
       </Row>
     </Container>
+
   );
 }
 
