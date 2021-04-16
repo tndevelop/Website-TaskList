@@ -1,17 +1,13 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Container, Row, Button, Navbar, Form, ListGroup } from "react-bootstrap";
+import { Col, Container, Row, Navbar, Form, ListGroup } from "react-bootstrap";
 import FormControl from 'react-bootstrap/FormControl'
 import React from "react";
-import { PersonSquare } from "react-bootstrap-icons";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
-import { FaBeer } from 'react-icons/fa';
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsCheckAll } from "react-icons/bs";
-import { IconContext } from "react-icons";
 import { BiUserCircle } from "react-icons/bi";
 
 function App() {
@@ -31,7 +27,7 @@ function App() {
         </Form>
 
 
-        <a className="nav-item nav-link" href="#">
+        <a className="nav-item nav-link" href="index.html">
               <BiUserCircle size="2em" color="white"></BiUserCircle>
         </a>
 
