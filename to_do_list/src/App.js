@@ -10,15 +10,19 @@ import { FaBeer } from 'react-icons/fa';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BsCheckAll } from "react-icons/bs";
+import { IconContext } from "react-icons";
+import { BiUserCircle } from "react-icons/bi";
 
 function App() {
   return (
-    <Container fluid>
+    <Container fluid="true">
+
       <Navbar bg="success" variant="dark" className="justify-content-between">
 
         <Navbar.Brand href="index.html">
-          <BsCheckAll></BsCheckAll> ToDo Manager
-</Navbar.Brand>
+          <BsCheckAll size="2em"></BsCheckAll> ToDo Manager
+        </Navbar.Brand>
 
 
 
@@ -28,31 +32,23 @@ function App() {
 
 
         <a className="nav-item nav-link" href="#">
-          <IconContext.Provider value={{ size: "2em" }}>
-            <div>
-              <BiUserCircle></BiUserCircle>
-            </div>
-          </IconContext.Provider>
+              <BiUserCircle size="2em" color="white"></BiUserCircle>
         </a>
 
       </Navbar>
-
-
-      <Row className="vheight-100">
-        <Col sm={4} xs={12} className="bg-light below-nav d-sm-block collapse" id="left-sidebar">
-          <ListGroup variant="flush">
-            <ListGroup.Item active action href="#">All</ListGroup.Item>
-            <ListGroup.Item action href="#">Important</ListGroup.Item>
-            <ListGroup.Item action href="#">Today</ListGroup.Item>
-            <ListGroup.Item action href="#">Next 7 Days</ListGroup.Item>
-            <ListGroup.Item action href="#">Private</ListGroup.Item>
-          </ListGroup>
-
-        </Col>
-      </Row>
-      <Row>Navn</Row>
+    
       <Row>
-        <Col sm="auto">Side</Col>
+       
+        <Col sm={3} xs={12} className="vheight-100 bg-light below-nav d-sm-block collapse" id="left-sidebar">
+            <ListGroup variant="flush">
+              <ListGroup.Item active action href="#">All</ListGroup.Item>
+              <ListGroup.Item action href="#">Important</ListGroup.Item>
+              <ListGroup.Item action href="#">Today</ListGroup.Item>
+              <ListGroup.Item action href="#">Next 7 Days</ListGroup.Item>
+              <ListGroup.Item action href="#">Private</ListGroup.Item>
+            </ListGroup>
+       </Col>
+
         <Col as={Container} fluid="xl" className="mainContainer">
           <h1 id="selectedFilter">
             <b>Filter</b>: all
@@ -84,7 +80,7 @@ function App() {
                   />
                 </Col>
                 <Col sm="2">
-                  <PersonSquare></PersonSquare>
+                  <BiUserCircle size="1.85em"></BiUserCircle>
                 </Col>
 
                 <Col>Saturday, June 20th 2020, 12:00:00 am</Col>
