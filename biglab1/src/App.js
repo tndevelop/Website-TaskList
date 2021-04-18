@@ -14,7 +14,7 @@ function App() {
   return (
     <Container fluid="true">
 
-      <Navbar bg="success" variant="dark" className="justify-content-between">
+      <Navbar  fixed="top" bg="success" variant="dark" className="justify-content-between">
 
         <Navbar.Brand href="index.html">
           <BsCheckAll size="2em"></BsCheckAll> ToDo Manager
@@ -45,7 +45,7 @@ function App() {
             </ListGroup>
        </Col>
 
-        <Col as={Container} fluid="xl" className="mainContainer">
+        <Col as={Container} fluid="xl" className="mainContainer below-nav">
           <h1 id="selectedFilter">
             <b>Filter</b>: all
           </h1>
