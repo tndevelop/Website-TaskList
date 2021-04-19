@@ -3,6 +3,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { Actions } from "components/Actions.js";
 import { Private } from "components/Private.js";
 import Deadline from './Deadline';
+import Description from './Description';
 
 
 function MainContent(props){
@@ -17,29 +18,6 @@ function MainContent(props){
               <Row>
                 <Col>
                   <Form.Check type="checkbox" label="Study for the exam" />
-                </Col>
-                <Actions></Actions>
-              </Row>
-            </ListGroup.Item>
-            {/* Taks2 */}
-            <ListGroup.Item>
-              <Row>
-                <Col>
-                  <Form.Check
-                    type="checkbox"
-                    label="Prepare the slides for the exam"
-                  />
-                </Col>
-                <Private></Private>
-                <Deadline></Deadline>
-                <Actions></Actions>
-              </Row>
-            </ListGroup.Item>
-            {/* Task 3 */}
-            <ListGroup.Item>
-              <Row>
-                <Col>
-                  <Form.Check type="checkbox" label="Call Mary" />
                 </Col>
                 <Actions></Actions>
               </Row>
