@@ -19,9 +19,9 @@ import './components/TaskList.js';
 ];*/ 
 
 const taskList = [
-  {id:0, description:'Study for the exam', Urgent:true, Private:false, deadline:"2021-03-16T09:00:00.000Z"},
-  {id:1, description:'Prepare the slides for the exam', Urgent:true, Private:false, deadline:"2021-03-08T15:20:00.000Z"},
-  {id:2, description:'Call Mary', Urgent:true, Private:false, deadline:"2021-03-08T15:20:00.000Z"}
+  {id:0, description:'Study for the exam', urgent:true, private:true, deadline:"2021-03-16T09:00:00.000Z"},
+  {id:1, description:'Prepare the slides for the exam', urgent:false, private:false, deadline:"2021-03-08T15:20:00.000Z"},
+  {id:2, description:'Call Mary', urgent:true, private:false, deadline:"2021-03-08T15:20:00.000Z"}
 ];
 
 

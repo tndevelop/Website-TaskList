@@ -4,16 +4,22 @@ import  Private  from "./Private";
 import Deadline from './Deadline';
 import Description from './Description';
 
-function TaskList() {
+function TaskList(props) {
     return (
         <ListGroup variant="flush">
-        {/* Task 1 */}
-        <ListGroup.Item>
-          <Row>
-            <Deadline></Deadline>
-            <Actions></Actions>
-          </Row>
-        </ListGroup.Item>
+        {props.taskList.map((t, index) => {
+    return <ListGroup.Item key={index} index={index}>
+              <Row>
+                <Description urgent={t.urgent} description={t.description}/>
+                
+                {t.private ? <Private></Private> : false }
+                <Deadline deadline={t.deadline}></Deadline>
+                <Actions taskList={props.taskList}></Actions>
+              </Row>
+            </ListGroup.Item>
+          
+        })}
+        
       </ListGroup>
     );
   }
