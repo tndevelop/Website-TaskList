@@ -20,16 +20,6 @@ function App() {
           <BsCheckAll size="2em"></BsCheckAll> ToDo Manager
         </Navbar.Brand>
 
-
-
-
-
-
-
-
-
-
-
         <Form className="form-inline my-2 my-lg-0 mx-auto d-none d-sm-block" action="#" role="search" aria-label="Quick search">
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
         </Form>
