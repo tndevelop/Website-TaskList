@@ -1,38 +1,21 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Container, Row, Navbar, Form, ListGroup } from "react-bootstrap";
-import FormControl from 'react-bootstrap/FormControl'
+import { Col, Container, Row, Form, ListGroup } from "react-bootstrap";
+
 import React from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BsCheckAll } from "react-icons/bs";
+
 import { BiUserCircle } from "react-icons/bi";
+import MyNavbar from "./components/MyNavbar";
 
 function App() {
   return (
     <Container fluid="true">
 
-      <Navbar  fixed="top" bg="success" variant="dark" className="justify-content-between">
-
-        <Navbar.Brand href="index.html">
-          <BsCheckAll size="2em"></BsCheckAll> ToDo Manager
-        </Navbar.Brand>
-
-        <Form className="form-inline my-2 my-lg-0 mx-auto d-none d-sm-block" action="#" role="search" aria-label="Quick search">
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        </Form>
-
-
-
-
-
-        <a className="nav-item nav-link" href="index.html">
-              <BiUserCircle size="2em" color="white"></BiUserCircle>
-        </a>
-
-      </Navbar>
+      <MyNavbar></MyNavbar>
     
       <Row>
        
