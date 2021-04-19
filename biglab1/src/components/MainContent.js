@@ -1,7 +1,7 @@
 import { Col, Row, Container, Form, ListGroup } from 'react-bootstrap';
-import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
+import { Actions } from "components/Actions.js";
 
 function MainContent(props){
     return(
@@ -16,14 +16,7 @@ function MainContent(props){
                 <Col>
                   <Form.Check type="checkbox" label="Study for the exam" />
                 </Col>
-
-                <Col sm="auto">
-                  <FaPencilAlt className="pencil"></FaPencilAlt>
-                </Col>
-
-                <Col sm={0.5}>
-                  <FaTrashAlt className="trash"></FaTrashAlt>
-                </Col>
+                <Actions></Actions>
               </Row>
             </ListGroup.Item>
             {/* Taks2 */}
@@ -41,13 +34,7 @@ function MainContent(props){
 
                 <Col>Saturday, June 20th 2020, 12:00:00 am</Col>
 
-                <Col sm="auto">
-                  <FaPencilAlt className="pencil"></FaPencilAlt>
-                </Col>
-
-                <Col sm="0.5">
-                  <FaTrashAlt className="trash"></FaTrashAlt>
-                </Col>
+                <Actions></Actions>
               </Row>
             </ListGroup.Item>
             {/* Task 3 */}
@@ -56,14 +43,7 @@ function MainContent(props){
                 <Col>
                   <Form.Check type="checkbox" label="Call Mary" />
                 </Col>
-
-                <Col sm="auto">
-                  <FaPencilAlt className="pencil"></FaPencilAlt>
-                </Col>
-
-                <Col sm={0.5}>
-                  <FaTrashAlt className="trash"></FaTrashAlt>
-                </Col>
+                <Actions></Actions>
               </Row>
             </ListGroup.Item>
           </ListGroup>
