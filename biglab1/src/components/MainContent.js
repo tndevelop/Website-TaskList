@@ -1,7 +1,7 @@
 import { Col, Row, Container, Form, ListGroup } from 'react-bootstrap';
 import { AiFillPlusCircle } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
-import { Actions } from "components/Actions.js";
+import Actions from "./Actions";
 
 function MainContent(props){
     return(
@@ -10,6 +10,7 @@ function MainContent(props){
             <b>Filter</b>: all
           </h1>
           <ListGroup variant="flush">
+            
             {/* Task 1 */}
             <ListGroup.Item>
               <Row>
@@ -19,6 +20,7 @@ function MainContent(props){
                 <Actions></Actions>
               </Row>
             </ListGroup.Item>
+            
             {/* Taks2 */}
             <ListGroup.Item>
               <Row>
@@ -37,6 +39,7 @@ function MainContent(props){
                 <Actions></Actions>
               </Row>
             </ListGroup.Item>
+            
             {/* Task 3 */}
             <ListGroup.Item>
               <Row>

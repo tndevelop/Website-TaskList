@@ -8,6 +8,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsCheckAll } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import MainContent from "./components/MainContent";
+import './components/TaskList.js';
+
+
+/*const fakeExams = [
+  {code: '01TYMOV', score: 28, date: dayjs('2021-03-01')},
+  {code: '01SQJOV', score: 29, date: dayjs('2021-06-03')},
+  {code: '04GSPOV', score: 18, date: dayjs('2021-05-24')},
+  {code: '01TXYOV', score: 24, date: dayjs('2021-06-21')}
+];*/ 
+
+const taskList = [
+  {id:0, description:'Study for the exam', Urgent:true, Private:false, deadline:"2021-03-16T09:00:00.000Z"},
+  {id:1, description:'Prepare the slides for the exam', Urgent:true, Private:false, deadline:"2021-03-08T15:20:00.000Z"},
+  {id:2, description:'Call Mary', Urgent:true, Private:false, deadline:"2021-03-08T15:20:00.000Z"}
+];
+
 
 function App() {
   return (
@@ -42,7 +58,7 @@ function App() {
             </ListGroup>
        </Col>
 
-        <MainContent/>
+        <MainContent taskList={taskList}/>
         
       </Row>
     </Container>
