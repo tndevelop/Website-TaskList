@@ -1,7 +1,9 @@
 import { Col, Row, Container, Form, ListGroup } from 'react-bootstrap';
 import { AiFillPlusCircle } from "react-icons/ai";
-import { BiUserCircle } from "react-icons/bi";
 import { Actions } from "components/Actions.js";
+import { Private } from "components/Private.js";
+import Deadline from './Deadline';
+
 
 function MainContent(props){
     return(
@@ -28,12 +30,8 @@ function MainContent(props){
                     label="Prepare the slides for the exam"
                   />
                 </Col>
-                <Col sm="2">
-                  <BiUserCircle size="1.85em"></BiUserCircle>
-                </Col>
-
-                <Col>Saturday, June 20th 2020, 12:00:00 am</Col>
-
+                <Private></Private>
+                <Deadline></Deadline>
                 <Actions></Actions>
               </Row>
             </ListGroup.Item>
