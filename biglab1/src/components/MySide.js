@@ -18,19 +18,21 @@ function ListGroupContainer(props) {
             }
             
         </ListGroup>
+
+        
     );
 }
 
 function ItemSide(props){
     if(props.selected){
         return(
-            <ListGroup.Item active action  >{props.name}</ListGroup.Item>
+            <ListGroup.Item  action  href={"#" + props.name}  active>{props.name}</ListGroup.Item>
         );
 
     }
     else {
         return (
-            <ListGroup.Item action onClick={() => props.choose(props.index)}>{props.name}</ListGroup.Item>
+            <ListGroup.Item action  href={"#" + props.name} onClick={() => props.choose(props.index)}>{props.name}</ListGroup.Item>
         );
     }
 } 
