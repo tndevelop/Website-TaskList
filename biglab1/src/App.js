@@ -1,98 +1,65 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Container, Row, Form, ListGroup } from "react-bootstrap";
 
 import React from "react";
-import { AiFillPlusCircle } from "react-icons/ai";
-import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BiUserCircle } from "react-icons/bi";
-import {ListGroupContainer} from "./components/MySide.js";
+import { ListGroupContainer } from "./components/MySide.js";
 import MyNavbar from "./components/MyNavbar";
+import MainContent from "./components/MainContent";
+import "./components/TaskList.js";
 
-const filterNames = ['All', 'Important', 'Next7', 'Private'];
+/*const fakeExams = [
+  {code: '01TYMOV', score: 28, date: dayjs('2021-03-01')},
+  {code: '01SQJOV', score: 29, date: dayjs('2021-06-03')},
+  {code: '04GSPOV', score: 18, date: dayjs('2021-05-24')},
+  {code: '01TXYOV', score: 24, date: dayjs('2021-06-21')}
+];*/
+
+const taskList = [
+  {
+    id: 0,
+    description: "Study for the exam",
+    urgent: true,
+    private: true,
+    deadline: "2021-03-16T09:00:00.000Z",
+  },
+  {
+    id: 1,
+    description: "Prepare the slides for the exam",
+    urgent: false,
+    private: false,
+    deadline: "2021-03-08T15:20:00.000Z",
+  },
+  {
+    id: 2,
+    description: "Call Mary",
+    urgent: true,
+    private: false,
+    deadline: "2021-03-08T15:20:00.000Z",
+  },
+];
+
+const filterNames = ["All", "Important", "Next7", "Private"];
 function App() {
   return (
     <Container fluid="true">
       <MyNavbar></MyNavbar>
       <Row>
-      <Col sm={3} xs={12} className="vheight-100 bg-light below-nav d-sm-block collapse" id="left-sidebar">
-        <ListGroupContainer names={filterNames}/>
-      </Col>
-        <Col as={Container} fluid="xl" className="mainContainer below-nav">
-          <h1 id="selectedFilter">
-            <b>Filter</b>: all
-          </h1>
-          <ListGroup variant="flush">
-            {/* Task 1 */}
-            <ListGroup.Item>
-              <Row>
-                <Col>
-                  <Form.Check type="checkbox" label="Study for the exam" />
-                </Col>
-
-                <Col sm="auto">
-                  <FaPencilAlt className="pencil"></FaPencilAlt>
-                </Col>
-
-                <Col sm={0.5}>
-                  <FaTrashAlt className="trash"></FaTrashAlt>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-            {/* Taks2 */}
-            <ListGroup.Item>
-              <Row>
-                <Col>
-                  <Form.Check
-                    type="checkbox"
-                    label="Prepare the slides for the exam"
-                  />
-                </Col>
-                <Col sm="2">
-                  <BiUserCircle size="1.85em"></BiUserCircle>
-                </Col>
-
-                <Col>Saturday, June 20th 2020, 12:00:00 am</Col>
-
-                <Col sm="auto">
-                  <FaPencilAlt className="pencil"></FaPencilAlt>
-                </Col>
-
-                <Col sm="0.5">
-                  <FaTrashAlt className="trash"></FaTrashAlt>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-            {/* Task 3 */}
-            <ListGroup.Item>
-              <Row>
-                <Col>
-                  <Form.Check type="checkbox" label="Call Mary" />
-                </Col>
-
-                <Col sm="auto">
-                  <FaPencilAlt className="pencil"></FaPencilAlt>
-                </Col>
-
-                <Col sm={0.5}>
-                  <FaTrashAlt className="trash"></FaTrashAlt>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-          </ListGroup>
-          {/* Bottom plus */}
-          <AiFillPlusCircle
-            className="plusButton"
-            color="green"
-          ></AiFillPlusCircle>
+        <Col
+          sm={3}
+          xs={12}
+          className="vheight-100 bg-light below-nav d-sm-block collapse"
+          id="left-sidebar"
+        >
+          <ListGroupContainer names={filterNames} />
         </Col>
+        <MainContent taskList={taskList} />
       </Row>
     </Container>
-
   );
 }
-
 
 export default App;
