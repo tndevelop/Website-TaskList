@@ -19,9 +19,6 @@ function ListGroupContainer(props) {
             
         </ListGroup>
     );
-    
-    
-  
 }
 
 function ItemSide(props){
