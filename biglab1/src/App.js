@@ -1,11 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Container, Row, Form, ListGroup } from "react-bootstrap";
-
+import { Col, Container, Row } from "react-bootstrap";
 import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import { BiUserCircle } from "react-icons/bi";
 import { ListGroupContainer } from "./components/MySide.js";
 import MyNavbar from "./components/MyNavbar";
 import MainContent from "./components/MainContent";
@@ -42,7 +39,7 @@ const taskList = [
   },
 ];
 
-const filterNames = ["All", "Important", "Next7", "Private"];
+const filterNames = ["All", "Important", "Today", "Next7", "Private"];
 function App() {
   return (
     <Container fluid="true">
@@ -57,7 +54,7 @@ function App() {
           <ListGroupContainer names={filterNames} />
         </Col>
         <MainContent taskList={taskList} />
-      </Row>
+      </Row>    
     </Container>
   );
 }
