@@ -48,7 +48,7 @@ function App() {
         <Col
           sm={3}
           xs={12}
-          className="vheight-100 bg-light below-nav d-sm-block collapse"
+          className="vheight-100 bg-light below-nav sidebar-left-padding d-sm-block collapse"
           id="left-sidebar"
         >
           <ListGroupContainer names={filterNames} />
