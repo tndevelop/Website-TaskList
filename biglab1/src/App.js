@@ -7,6 +7,7 @@ import { ListGroupContainer } from "./components/MySide.js";
 import MyNavbar from "./components/MyNavbar";
 import MainContent from "./components/MainContent";
 import "./components/TaskList.js";
+import dayjs from "dayjs";
 
 /*const fakeExams = [
   {code: '01TYMOV', score: 28, date: dayjs('2021-03-01')},
@@ -20,22 +21,22 @@ const taskList = [
     id: 0,
     description: "Study for the exam",
     urgent: true,
-    private: true,
-    deadline: "2021-03-16T09:00:00.000Z",
+    shared: true,
+    deadline: dayjs("2021-03-16T09:00:00.000Z"),
   },
   {
     id: 1,
     description: "Prepare the slides for the exam",
     urgent: false,
-    private: false,
-    deadline: "2021-03-08T15:20:00.000Z",
+    shared: false,
+    deadline: dayjs("2021-03-08T15:20:00.000Z"),
   },
   {
     id: 2,
     description: "Call Mary",
     urgent: true,
-    private: false,
-    deadline: "2021-03-08T15:20:00.000Z",
+    shared: false,
+    deadline: dayjs("2021-03-08T15:20:00.000Z"),
   },
 ];
 
@@ -54,7 +55,7 @@ function App() {
           <ListGroupContainer names={filterNames} />
         </Col>
         <MainContent taskList={taskList} />
-      </Row>    
+      </Row>
     </Container>
   );
 }

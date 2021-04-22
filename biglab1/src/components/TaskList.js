@@ -1,6 +1,6 @@
 import { Row, ListGroup } from "react-bootstrap";
 import Actions from "./Actions.js";
-import Private from "./Private";
+import Shared from "./Private";
 import Deadline from "./Deadline";
 import Description from "./Description";
 
@@ -12,8 +12,7 @@ function TaskList(props) {
           <ListGroup.Item key={index} index={index}>
             <Row>
               <Description urgent={t.urgent} description={t.description} />
-
-              {t.private ? <Private></Private> : false}
+              <Shared shared={t.shared}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
               <Actions taskList={props.taskList}></Actions>
             </Row>

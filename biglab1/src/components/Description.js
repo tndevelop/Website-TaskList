@@ -1,9 +1,13 @@
 import { Col, Form } from "react-bootstrap";
 
-function Description() {
+function Description(props) {
   return (
     <Col>
-      <Form.Check type="checkbox" label="Prepare the slides for the exam" />
+      <Form.Check
+        type="checkbox"
+        label={props.description}
+        className={props.urgent ? "text-danger" : ""}
+      />
     </Col>
   );
 }

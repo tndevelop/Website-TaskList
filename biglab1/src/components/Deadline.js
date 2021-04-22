@@ -1,6 +1,10 @@
 import { Col } from "react-bootstrap";
 
-function Deadline() {
-  return <Col>Saturday, June 20th 2020, 12:00:00 am</Col>;
+function Deadline(props) {
+  return (
+    <Col className="d-flex justify-content-center">
+      {props.deadline.format("YYYY-MM-DD HH:mm")}
+    </Col>
+  );
 }
 export default Deadline;
