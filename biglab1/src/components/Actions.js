@@ -1,6 +1,10 @@
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import { Col } from "react-bootstrap";
 
+/**
+ * Section that contains modify and delete buttons
+ * @param props Must contain *functions* **modify** and **remove**
+ */
 function Actions(props) {
   return (
     <>
@@ -14,4 +18,4 @@ function Actions(props) {
   );
 }
 
-export default Actions;
+export { Actions };

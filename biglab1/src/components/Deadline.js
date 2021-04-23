@@ -1,5 +1,9 @@
 import { Col } from "react-bootstrap";
 
+/**
+ * Deadline contains a date in format "YYYY-MM-DD HH::mm"
+ * @param props Must contain a *dayjs* argument **deadline**
+ */
 function Deadline(props) {
   return (
     <Col className="d-flex justify-content-center">
@@ -7,4 +11,4 @@ function Deadline(props) {
     </Col>
   );
 }
-export default Deadline;
+export { Deadline };

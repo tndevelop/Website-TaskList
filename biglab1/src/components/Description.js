@@ -1,5 +1,9 @@
 import { Col, Form } from "react-bootstrap";
 
+/**
+ * Description contains a checkbox and the text description. Text is red if **urgent** is *true*.
+ * @param props Must contain *string* **description** and *bool* **urgent**
+ */
 function Description(props) {
   return (
     <Col>
@@ -12,4 +16,4 @@ function Description(props) {
   );
 }
 
-export default Description;
+export { Description };

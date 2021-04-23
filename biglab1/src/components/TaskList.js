@@ -1,8 +1,8 @@
 import { Row, ListGroup } from "react-bootstrap";
-import Actions from "./Actions.js";
-import Shared from "./Private";
-import Deadline from "./Deadline";
-import Description from "./Description";
+import { Actions } from "./Actions.js";
+import { Shared } from "./Shared";
+import { Deadline } from "./Deadline";
+import { Description } from "./Description";
 
 function TaskList(props) {
   return (
