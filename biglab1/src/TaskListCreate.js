@@ -38,6 +38,8 @@ function List() {
         return this.list
             .filter((task) => task.urgent);
     }
+
+    this.getList = () => this.list;
 };
 
 export { Task, List }
