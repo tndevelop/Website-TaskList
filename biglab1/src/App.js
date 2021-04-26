@@ -38,9 +38,9 @@ function App() {
           className="vheight-100 bg-light below-nav sidebar-left-padding d-sm-block collapse"
           id="left-sidebar"
         >
-        <ListGroupContainer names={filterNames} selectedItem={chooseFilter} setSelectedItemApp={chooseFilter} />
+        <ListGroupContainer names={filterNames} selectedItem={selectedItem} chooseFilter={chooseFilter}/>
         </Col>
-        <MainContent taskList={taskList.getList()} selected={selectedItem}/>
+        <MainContent taskList={taskList} selected={selectedItem}/>
       </Row>
     </Container>
   );
