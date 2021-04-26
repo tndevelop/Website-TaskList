@@ -5,9 +5,12 @@ import { Deadline } from "./Deadline";
 import { Description } from "./Description";
 
 function TaskList(props) {
+
+  const filteredTaskList = filterList(props.taskList, props.selected);
+
   return (
     <ListGroup variant="flush">
-      {props.taskList.map((t, index) => {
+      {filteredTaskList.map((t, index) => {
         return (
           <ListGroup.Item key={index} index={index}>
             <Row>
@@ -21,6 +24,23 @@ function TaskList(props) {
       })}
     </ListGroup>
   );
+}
+
+function filterList(taskList, selected) {
+  switch (selected) {
+    case 'All':
+      return taskList.filterAll();
+    case 'Important':
+      return taskList.filterByImportant();
+    case 'Today':
+      return taskList.filterByToday();
+    case 'Next7':
+      return taskList.filterByNextWeek();
+    case 'Private':
+      return taskList.filterByPrivate();
+    default:
+      break;
+  }
 }
 
 export default TaskList;

@@ -26,7 +26,7 @@ const filterNames = ["All", "Important", "Today", "Next7", "Private"];
 
 function App() {
   const [selectedItem, setSelectedItem] = useState("All");
-  const chooseFilter = (name) => setSelectedItem(name);
+  const chooseFilter = (selected) => setSelectedItem(selected);
 
   return (
     <Container fluid="true">
@@ -38,38 +38,12 @@ function App() {
           className="vheight-100 bg-light below-nav sidebar-left-padding d-sm-block collapse"
           id="left-sidebar"
         >
-
-        <ListGroupContainer names={filterNames} selectedItem={selectedItem} setSelectedItemApp={chooseFilter} />
+        <ListGroupContainer names={filterNames} selectedItem={chooseFilter} setSelectedItemApp={chooseFilter} />
         </Col>
-        <MainContent taskList={getSelected(taskList, selectedItem)} />
+        <MainContent taskList={taskList.getList()} selected={selectedItem}/>
       </Row>
     </Container>
   );
 }
-
-const getSelected = (taskList, selected) => {
-
-  switch (selected) {
-    case 'All':
-      taskList.filterAll();
-      break;
-    case 'Important':
-      taskList.filterByImportant();
-      break;
-    case 'Today':
-      taskList.filterByToday();
-      break;
-    case 'Next7':
-      taskList.filterByNextWeek();
-      break;
-    case 'Private':
-      taskList.filterByPrivate();
-      break;
-    default:
-      break;
-  }
-
-  return taskList.getList();
-};
 
 export default App;

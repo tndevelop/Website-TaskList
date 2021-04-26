@@ -8,7 +8,7 @@ function MainContent(props) {
       <h1 id="selectedFilter">
         <b>Filter</b>: all
       </h1>
-      <TaskList taskList={props.taskList}></TaskList>
+      <TaskList taskList={props.taskList} selected={props.selected}></TaskList>
       {/* Bottom plus */}
       <AiFillPlusCircle className="plusButton" color="green"></AiFillPlusCircle>
     </Col>
