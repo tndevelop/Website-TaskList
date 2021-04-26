@@ -6,13 +6,47 @@ function Task(id, description, isUrgent = false, isPrivate = true, deadline = fa
     this.urgent = isUrgent;
     this.private = isPrivate;
     // saved as dayjs object
-    if(deadline!==false){
+    if (deadline !== false) {
         this.deadline = dayjs(deadline);
     }
     this._formatDeadline = (format) => {
         return this.deadline ? this.deadline.format(format) : '<not defined>';
     }
+
+    //Filters
+    this.isImportant = () => { return this.important; }
+
+    this.isPrivate = () => { return this.private; }
+
+    this.isToday = () => {
+        const comparisonTemplate = 'YYYY-MM-DD';
+        const now = dayjs();
+        return this.deadline && (this.deadline.format(comparisonTemplate) === now.format(comparisonTemplate));
+    }
+
+    this.isYesterday = () => {
+        const comparisonTemplate = 'YYYY-MM-DD';
+        const yesterday = dayjs().subtract(1, 'day');
+        return this.deadline && (this.deadline.format(comparisonTemplate) === yesterday.format(comparisonTemplate));
+    }
+
+    this.isTomorrow = () => {
+        const comparisonTemplate = 'YYYY-MM-DD';
+        const tomorrow = dayjs().add(1, 'day');
+        return this.deadline && (this.deadline.format(comparisonTemplate) === tomorrow.format(comparisonTemplate));
+    }
+
+
+    this.isNextWeek = () => {
+        const tomorrow = dayjs().add(1, 'day');
+        const nextWeek = dayjs().add(7, 'day');
+        const ret = this.deadline && (!this.deadline.isBefore(tomorrow, 'day') && !this.deadline.isAfter(nextWeek, 'day'));
+        console.dir(this.deadline);
+        console.log(ret);
+        return ret;
+    }
 }
+
 
 function List() {
     this.list = [];
@@ -23,20 +57,24 @@ function List() {
         else throw new Error('Duplicate id');
     };
 
-    this.sortByDeadline = () => {
-        return [...this.list]
-            .sort((a, b) => {
-                const t1 = a.deadline, t2 = b.deadline;
-                if (t1 === t2) return 0; // works also for null === null
-                else if (t1 === null || t1 === '') return 1;    // null/empty deadline is the lower value
-                else if (t2 === null || t2 === '') return -1;
-                else return t1.diff(t2)
-            });
+    this.filterAll = () => {
+        return this.list.filter( () => true);
     }
 
-    this.filterByUrgent = () => {
-        return this.list
-            .filter((task) => task.urgent);
+    this.filterByImportant = () => {
+        return this.list.filter((task) => task.isImportant());
+    }
+
+    this.filterByToday = () => {
+        return this.list.filter( (task) => task.isToday() );
+    }
+
+    this.filterByNextWeek = () => {
+        return this.list.filter( (task) => task.isNextWeek() );
+    }
+
+    this.filterByPrivate = () => {
+        return this.list.filter( (task) => task.isPrivate() );
     }
 
     this.getList = () => this.list;
