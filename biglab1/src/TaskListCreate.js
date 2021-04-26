@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 function Task(id, description, isUrgent = false, isPrivate = true, deadline = false) {
-    this.id = id;
+    this.id = id++;
     this.description = description;
     this.urgent = isUrgent;
     this.private = isPrivate;
@@ -50,6 +50,13 @@ function Task(id, description, isUrgent = false, isPrivate = true, deadline = fa
 
 function List() {
     this.list = [];
+    this.count=0;
+
+    this.createElement = (description, isUrgent, isPrivate, deadline) => {
+        const task = new Task(this.count, description, isUrgent, isPrivate, deadline);
+        this.count++;
+        this.add(task);
+    }
 
     this.add = (task) => {
         if (!this.list.some(t => t.id === task.id))
