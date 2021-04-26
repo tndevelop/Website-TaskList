@@ -6,7 +6,7 @@ import { Col } from "react-bootstrap";
  */
 function Deadline(props) {
   return (
-    <Col className="d-flex justify-content-center">
+    <Col className="d-flex justify-content-end">
       {props.deadline ? props.deadline.format("YYYY-MM-DD HH:mm") : ""}
     </Col>
   );

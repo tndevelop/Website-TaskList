@@ -10,9 +10,10 @@ import './components/TaskList.js';
 import { Task, List } from './TaskListCreate';
 
 // create some dummy tasks
-const t1 = new Task(1, "laundry", 0, 1);
-const t2 = new Task(2, "monday lab", 0, 0, "2021-03-16T09:00:00.000Z");
-const t3 = new Task(3, "phone call", 1, 0, "2021-03-08T15:20:00.000Z");
+// id, description, urgent, private, deadline
+const t1 = new Task(1, "laundry", false, true);
+const t2 = new Task(2, "monday lab", false, false, "2021-03-16T09:00:00.000Z");
+const t3 = new Task(3, "phone call", true, false, "2021-03-08T15:20:00.000Z");
 
 // create the task list and add the dummy tasks
 const taskList = new List();
