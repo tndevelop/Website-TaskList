@@ -54,6 +54,7 @@ function List() {
         const task = new Task(this.count, description, isUrgent, isPrivate, deadline);
         this.count++;
         this.add(task);
+        return this;
     }
 
     this.add = (task) => {
