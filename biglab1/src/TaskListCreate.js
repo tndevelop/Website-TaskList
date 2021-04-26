@@ -41,8 +41,6 @@ function Task(id, description, isImportant = false, isPrivate = true, deadline =
         const tomorrow = dayjs().add(1, 'day');
         const nextWeek = dayjs().add(7, 'day');
         const ret = this.deadline && (!this.deadline.isBefore(tomorrow, 'day') && !this.deadline.isAfter(nextWeek, 'day'));
-        console.dir(this.deadline);
-        console.log(ret);
         return ret;
     }
 }
