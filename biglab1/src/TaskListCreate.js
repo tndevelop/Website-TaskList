@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 
-function Task(id, description, isUrgent = false, isPrivate = true, deadline = false) {
-    this.id = id++;
+function Task(id, description, isImportant = false, isPrivate = true, deadline = false) {
+    this.id = id;
     this.description = description;
-    this.urgent = isUrgent;
+    this.important = isImportant;
     this.private = isPrivate;
     // saved as dayjs object
     if (deadline !== false) {

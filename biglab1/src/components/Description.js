@@ -10,7 +10,7 @@ function Description(props) {
       <Form.Check
         type="checkbox"
         label={props.description}
-        className={props.urgent ? "text-danger" : ""}
+        className={props.important ? "text-danger" : ""}
       />
     </Col>
   );

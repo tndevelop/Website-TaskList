@@ -14,7 +14,7 @@ function TaskList(props) {
         return (
           <ListGroup.Item key={index} index={index}>
             <Row>
-              <Description urgent={t.urgent} description={t.description} />
+              <Description important={t.important} description={t.description} />
               <Shared private={t.private}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
               <Actions taskList={props.taskList}></Actions>
