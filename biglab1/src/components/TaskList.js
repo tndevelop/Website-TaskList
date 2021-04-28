@@ -12,9 +12,9 @@ function TaskList(props) {
     <ListGroup variant="flush">
       {filteredTaskList.map((t, index) => {
         return (
-          <ListGroup.Item key={index} index={index}>
+          <ListGroup.Item key={t.id} index={t.id}>
             <Row>
-              <Description important={t.important} description={t.description} />
+              <Description setDone={props.setDone} id={t.id} done={t.done} important={t.important} description={t.description} />
               <Shared private={t.private}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
               <Actions taskList={props.taskList}></Actions>

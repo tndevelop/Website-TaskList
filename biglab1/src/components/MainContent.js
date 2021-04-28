@@ -13,7 +13,7 @@ function MainContent(props) {
       <h1 id="selectedFilter">
         <b>Filter</b>: all
       </h1>
-      <TaskList taskList={props.taskList} selected={props.selected}></TaskList>
+      <TaskList setDone={props.setDone} taskList={props.taskList} selected={props.selected}></TaskList>
       <MyForm createElement={props.createElement}></MyForm>
 
       {/* Bottom plus */}

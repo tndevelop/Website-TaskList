@@ -5,6 +5,7 @@ function Task(id, description, isImportant = false, isPrivate = true, deadline =
     this.description = description;
     this.important = isImportant;
     this.private = isPrivate;
+    this.done = false;
     // saved as dayjs object
     if (deadline !== false) {
         this.deadline = dayjs(deadline);
@@ -84,6 +85,10 @@ function List() {
     }
 
     this.getList = () => this.list;
+
+    this.setDone = (id, done) => {
+        this.list.filter((task) => task.id === id )[0].done = done;
+    }
 };
 
 export { Task, List }

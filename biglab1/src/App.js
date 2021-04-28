@@ -31,6 +31,10 @@ function App() {
     setAddedTask(!addedTask);
   };
 
+  const setDone = (id, done) => {
+    taskList.setDone(id, done);
+  }
+
   return (
     <Container fluid="true">
       <MyNavbar></MyNavbar>
@@ -43,7 +47,7 @@ function App() {
         >
         <ListGroupContainer names={filterNames} selectedItem={selectedItem} chooseFilter={chooseFilter}/>
         </Col>
-        <MainContent createElement={addElementAndRefresh} taskList={taskList} selected={selectedItem}/>
+        <MainContent setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} selected={selectedItem}/>
       </Row>
     </Container>
   );
