@@ -10,29 +10,25 @@ import MainContent from "./components/MainContent";
 import './components/TaskList.js';
 import { List } from './TaskListCreate';
 
-
-
 // create the task list and add the dummy tasks
 // id, description, urgent, private, deadline
 const taskList = new List();
-
 taskList.createElement("laundry", false, true);
 taskList.createElement("monday lab", false, false, "2021-03-16T09:00:00.000Z");
 taskList.createElement("phone call", true, false, "2021-03-08T15:20:00.000Z");
 taskList.createElement("lab", true, false, "2021-04-26T15:20:00.000Z");
 taskList.createElement("study", false, true, "2021-04-27T15:20:00.000Z");
 
-
-
 const filterNames = ["All", "Important", "Today", "Next7", "Private"];
 
 function App() {
-  const [tl, setTl] = useState(taskList);
   const [selectedItem, setSelectedItem] = useState("All");
   const chooseFilter = (selected) => setSelectedItem(selected);
+  const [addedTask, setAddedTask] = useState(true); //addedTask cambia alternativamente a true o a false quando viene aggiunto un nuovo task
 
   const addElementAndRefresh = (description, isUrgent, isPrivate, deadline) => {
-    setTl(taskList.createElement(description, isUrgent, isPrivate, deadline));
+    taskList.createElement(description, isUrgent, isPrivate, deadline)
+    setAddedTask(!addedTask);
   };
 
   return (
