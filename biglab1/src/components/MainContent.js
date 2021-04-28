@@ -28,6 +28,16 @@ function MyForm(props) {
   //Setters functions
   const Show = () => setHidden(false);
   const Hide = () => setHidden(true);
+  const resetFormFields = () => {
+    setDate(dayjs());
+    setDescription("");
+    setUrgent(false);
+    setPrivate(true);
+  }
+  const hideAndReset = () => {
+    Hide();
+    resetFormFields();
+  }
   //Validate form
   const ValidateForm = () => {
     return description !== "" && date.isSameOrAfter(dayjs(), "date");
@@ -37,6 +47,7 @@ function MyForm(props) {
     event.preventDefault();
     if (!ValidateForm()) return;
     props.createElement(description, isUrgent, isPrivate, date);
+    resetFormFields();
     Hide();
   };
   //Task paramaters
@@ -51,7 +62,7 @@ function MyForm(props) {
 
       {/*Modal*/}
 
-      <Modal show={!hidden} onHide={Hide}>
+      <Modal animation={false} show={!hidden} onHide={Hide}>
         <Modal.Header closeButton>
           <Modal.Title>Insert Task</Modal.Title>
         </Modal.Header>
@@ -99,7 +110,7 @@ function MyForm(props) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={Hide} variant="secondary">
+          <Button onClick={hideAndReset} variant="secondary">
             Close
           </Button>
           <Button onClick={SubmitChanges} variant="primary">
