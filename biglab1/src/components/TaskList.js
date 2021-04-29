@@ -20,7 +20,7 @@ function TaskList(props) {
                 important={t.important}
                 description={t.description}
               />
-              <Shared private={!t.private}></Shared>
+              <Shared private={t.private}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
               <Actions taskList={props.taskList}></Actions>
             </Row>

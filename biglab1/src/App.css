@@ -18,6 +18,7 @@
 
 .mainContainer {
   height: 98vh;
+  margin-right: 1vw;
 }
 
 .pencil:hover {

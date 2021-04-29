@@ -32,6 +32,22 @@ function MyForm(props) {
   const [isUrgent, setUrgent] = useState(false);
   const [isPrivate, setPrivate] = useState(true);
 
+  //Validate form
+  const validDescription = () => {
+    return description.length !== 0 && description.search(/^\s+$/gm) === -1;
+  };
+  const validDeadline = () => {
+    return date.isSameOrAfter(dayjs(), "day");
+  };
+
+  //Actions
+  const submitChanges = (event) => {
+    event.preventDefault();
+    if (!validDescription() || !validDeadline()) return;
+    props.createElement(description, isUrgent, isPrivate, date);
+    resetFormFields();
+    setHidden(true);
+  };
   const resetFormFields = () => {
     setDate(dayjs());
     setDescription("");
@@ -41,22 +57,6 @@ function MyForm(props) {
   const hideAndReset = () => {
     setHidden(true);
     resetFormFields();
-  };
-  //Validate form
-  const validDescription = () => {
-    return description.length !== 0 && description.search(/^\s+$/gm) === -1;
-  };
-  const validDeadline = () => {
-    return date.isSameOrAfter(dayjs(), "day");
-  };
-
-  //Confirm adding a task
-  const submitChanges = (event) => {
-    event.preventDefault();
-    if (!validDescription() || !validDeadline()) return;
-    props.createElement(description, isUrgent, isPrivate, date);
-    resetFormFields();
-    setHidden(true);
   };
 
   return (
