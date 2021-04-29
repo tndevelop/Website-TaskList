@@ -11,7 +11,7 @@ function MainContent(props) {
   return (
     <Col as={Container} fluid="xl" className="mainContainer below-nav">
       <h1 id="selectedFilter">
-        <b>Filter</b>: all
+        <b>Filter</b>: {props.selected}
       </h1>
       <TaskList
         setDone={props.setDone}
@@ -108,6 +108,7 @@ function MyForm(props) {
                 type="checkbox"
                 checked={isPrivate}
                 label="is private?"
+                id="checkPrivate"
                 onChange={(event) => setPrivate(event.target.checked)}
               />
               <Form.Check
@@ -115,6 +116,7 @@ function MyForm(props) {
                 type="checkbox"
                 checked={isUrgent}
                 label="is urgent?"
+                id="checkUrgent"
                 onChange={(event) => setUrgent(event.target.checked)}
               />
             </Form.Group>
