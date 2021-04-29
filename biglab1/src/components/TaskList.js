@@ -5,7 +5,6 @@ import { Deadline } from "./Deadline";
 import { Description } from "./Description";
 
 function TaskList(props) {
-
   const filteredTaskList = filterList(props.taskList, props.selected);
 
   return (
@@ -14,8 +13,14 @@ function TaskList(props) {
         return (
           <ListGroup.Item key={t.id} index={t.id}>
             <Row>
-              <Description setDone={props.setDone} id={t.id} done={t.done} important={t.important} description={t.description} />
-              <Shared private={t.private}></Shared>
+              <Description
+                setDone={props.setDone}
+                id={t.id}
+                done={t.done}
+                important={t.important}
+                description={t.description}
+              />
+              <Shared private={!t.private}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
               <Actions taskList={props.taskList}></Actions>
             </Row>
@@ -28,15 +33,15 @@ function TaskList(props) {
 
 function filterList(taskList, selected) {
   switch (selected) {
-    case 'All':
+    case "All":
       return taskList.filterAll();
-    case 'Important':
+    case "Important":
       return taskList.filterByImportant();
-    case 'Today':
+    case "Today":
       return taskList.filterByToday();
-    case 'Next7':
+    case "Next7":
       return taskList.filterByNextWeek();
-    case 'Private':
+    case "Private":
       return taskList.filterByPrivate();
     default:
       break;

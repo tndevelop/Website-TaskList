@@ -8,6 +8,10 @@
   height: 8vh;
 }
 
+.plusButton:hover {
+  fill: rgb(3, 41, 5);
+}
+
 .trash:hover {
   color: red;
 }

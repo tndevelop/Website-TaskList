@@ -13,11 +13,12 @@ function MainContent(props) {
       <h1 id="selectedFilter">
         <b>Filter</b>: all
       </h1>
-      <TaskList setDone={props.setDone} taskList={props.taskList} selected={props.selected}></TaskList>
+      <TaskList
+        setDone={props.setDone}
+        taskList={props.taskList}
+        selected={props.selected}
+      ></TaskList>
       <MyForm createElement={props.createElement}></MyForm>
-
-      {/* Bottom plus */}
-      <AiFillPlusCircle className="plusButton" color="green"></AiFillPlusCircle>
     </Col>
   );
 }
@@ -25,19 +26,22 @@ function MainContent(props) {
 function MyForm(props) {
   //State to show modal
   const [hidden, setHidden] = useState(true);
-  //Setters functions
-  const Show = () => setHidden(false);
-  const Hide = () => setHidden(true);
+  //Task paramaters
+  const [date, setDate] = useState(dayjs());
+  const [description, setDescription] = useState("");
+  const [isUrgent, setUrgent] = useState(false);
+  const [isPrivate, setPrivate] = useState(true);
+
   const resetFormFields = () => {
     setDate(dayjs());
     setDescription("");
     setUrgent(false);
     setPrivate(true);
-  }
+  };
   const hideAndReset = () => {
-    Hide();
+    setHidden(true);
     resetFormFields();
-  }
+  };
   //Validate form
   const ValidateForm = () => {
     return description !== "" && date.isSameOrAfter(dayjs(), "date");
@@ -48,21 +52,22 @@ function MyForm(props) {
     if (!ValidateForm()) return;
     props.createElement(description, isUrgent, isPrivate, date);
     resetFormFields();
-    Hide();
+    setHidden(true);
   };
-  //Task paramaters
-  const [date, setDate] = useState(dayjs());
-  const [description, setDescription] = useState("");
-  const [isUrgent, setUrgent] = useState(false);
-  const [isPrivate, setPrivate] = useState(true);
 
   return (
     <>
-      <Button onClick={Show}>Add new task</Button>
+      {/* Bottom plus */}
+
+      <AiFillPlusCircle
+        className="plusButton"
+        color="green"
+        onClick={() => setHidden(false)}
+      ></AiFillPlusCircle>
 
       {/*Modal*/}
 
-      <Modal animation={false} show={!hidden} onHide={Hide}>
+      <Modal animation={false} show={!hidden} onHide={() => setHidden(true)}>
         <Modal.Header closeButton>
           <Modal.Title>Insert Task</Modal.Title>
         </Modal.Header>
@@ -94,9 +99,7 @@ function MyForm(props) {
                 type="checkbox"
                 checked={isPrivate}
                 label="is private?"
-                onChange={(event) => {
-                  setPrivate(event.target.checked);
-                }}
+                onChange={(event) => setPrivate(event.target.checked)}
               />
               <Form.Check
                 inline
