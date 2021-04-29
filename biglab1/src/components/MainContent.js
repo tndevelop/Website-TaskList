@@ -43,13 +43,17 @@ function MyForm(props) {
     resetFormFields();
   };
   //Validate form
-  const ValidateForm = () => {
-    return description !== "" && date.isSameOrAfter(dayjs(), "date");
+  const validDescription = () => {
+    return description.length !== 0 && description.search(/^\s+$/gm) === -1;
   };
+  const validDeadline = () => {
+    return date.isSameOrAfter(dayjs(), "day");
+  };
+
   //Confirm adding a task
-  const SubmitChanges = (event) => {
+  const submitChanges = (event) => {
     event.preventDefault();
-    if (!ValidateForm()) return;
+    if (!validDescription() || !validDeadline()) return;
     props.createElement(description, isUrgent, isPrivate, date);
     resetFormFields();
     setHidden(true);
@@ -79,7 +83,8 @@ function MyForm(props) {
               <Form.Control
                 type="text"
                 placeholder="Description"
-                defaultValue={description}
+                isInvalid={!validDescription()}
+                value={description}
                 onChange={(event) => setDescription(event.target.value)}
               />
             </Form.Group>
@@ -87,10 +92,14 @@ function MyForm(props) {
             <Form.Group controlId="selectedDate">
               <Form.Label>Date</Form.Label>
               <Form.Control
+                isInvalid={!validDeadline()}
                 type="date"
-                defaultValue={date.format("YYYY-MM-DD")}
+                value={date.format("YYYY-MM-DD")}
                 onChange={(event) => setDate(dayjs(event.target.value))}
               />
+              <Form.Control.Feedback type="invalid">
+                Date must be today or after
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formBasicCheckbox">
@@ -116,7 +125,7 @@ function MyForm(props) {
           <Button onClick={hideAndReset} variant="secondary">
             Close
           </Button>
-          <Button onClick={SubmitChanges} variant="primary">
+          <Button onClick={submitChanges} variant="primary">
             Save changes
           </Button>
         </Modal.Footer>
