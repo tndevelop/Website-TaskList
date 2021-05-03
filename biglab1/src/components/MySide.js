@@ -1,4 +1,5 @@
 import { ListGroup } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 function ListGroupContainer(props) {
 
@@ -6,30 +7,22 @@ function ListGroupContainer(props) {
         <ListGroup variant="flush">
             {
                 props.names.map(
-                    (name, index) => <ItemSide name={name} index={index} key={index} selected={name === props.selectedItem} chooseFilter={props.chooseFilter}/>
-                       
+                    (name, index) => <Link key={index} to={name}><ItemSide name={name} index={index} key={index} selected={name === props.selectedItem} chooseFilter={props.chooseFilter} /></Link>
                 )
             }
-            
+
         </ListGroup>
 
-        
+
     );
 }
 
-function ItemSide(props){
-    if(props.selected){
-        return(
-            <ListGroup.Item  action  href={"#" + props.name}  active>{props.name}</ListGroup.Item>
-        );
-
-    }
-    else {
-        return (
-            <ListGroup.Item action  href={"#" + props.name} onClick={() => props.chooseFilter(props.name)}>{props.name}</ListGroup.Item>
-        );
-    }
-} 
+function ItemSide(props) {
+    return props.selected ?
+        ( <ListGroup.Item action active>{props.name}</ListGroup.Item> )
+        :
+        ( <ListGroup.Item action onClick={() => props.chooseFilter(props.name)}>{props.name}</ListGroup.Item> )
+}
 
 
 export { ListGroupContainer };

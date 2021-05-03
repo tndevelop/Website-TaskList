@@ -1,14 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container} from "react-bootstrap";
 import React from "react";
 import { useState } from 'react';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ListGroupContainer } from "./components/MySide.js";
 import MyNavbar from "./components/MyNavbar";
-import MainContent from "./components/MainContent";
 import './components/TaskList.js';
 import { List } from './TaskListCreate';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CentralRow from './components/CentralRow';
 
 // create the task list and add the dummy tasks
 // id, description, urgent, private, deadline
@@ -36,20 +36,37 @@ function App() {
   }
 
   return (
-    <Container fluid="true">
-      <MyNavbar></MyNavbar>
-      <Row>
-        <Col
-          sm={3}
-          xs={12}
-          className="vheight-100 bg-light below-nav sidebar-left-padding d-sm-block collapse"
-          id="left-sidebar"
-        >
-        <ListGroupContainer names={filterNames} selectedItem={selectedItem} chooseFilter={chooseFilter}/>
-        </Col>
-        <MainContent setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} selected={selectedItem}/>
-      </Row>
-    </Container>
+    <Router>
+
+      <Container fluid="true">
+        <MyNavbar></MyNavbar>
+        <Switch>
+
+
+          <Route exact path="/:selected" render={({ match }) =>
+            
+              <CentralRow filterNames={filterNames} selectedItem={match.params.selected} chooseFilter={chooseFilter}
+                setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} selected={match.params.selected}>
+              </CentralRow>
+              
+          } />
+
+          <Route exact path="/edit" render={() => {
+            return(<></>)
+            
+          }} />
+
+          <Route path="/" render={() =>
+            <CentralRow filterNames={filterNames} selectedItem={"All"} chooseFilter={chooseFilter}
+              setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} selected={"All"}>
+            </CentralRow>
+          } />
+
+
+        </Switch>
+      </Container>
+
+    </Router>
   );
 }
 
