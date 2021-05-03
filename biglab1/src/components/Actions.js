@@ -12,7 +12,7 @@ function Actions(props) {
         <FaPencilAlt className="pencil" action={props.modify}></FaPencilAlt>
       </Col>
       <Col sm={0.5}>
-        <FaTrashAlt className="trash" onClick={() => props.remove(props.task)}></FaTrashAlt>
+        <FaTrashAlt className="trash" onClick={() => props.removeTask(props.task)}></FaTrashAlt>
       </Col>
     </>
   );

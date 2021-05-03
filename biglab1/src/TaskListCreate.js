@@ -44,6 +44,10 @@ function Task(id, description, isImportant = false, isPrivate = true, deadline =
         const ret = this.deadline && (!this.deadline.isBefore(tomorrow, 'day') && !this.deadline.isAfter(nextWeek, 'day'));
         return ret;
     }
+
+    this.setDone = (id, done) => {
+        this.done = done;
+    }
 }
 
 
@@ -66,9 +70,6 @@ function List() {
 
     this.getList = () => this.list.filter(t => true);
     
-    this.setDone = (id, done) => {
-        this.list.filter((task) => task.id === id )[0].done = done;
-    }
 };
 
 export { Task, List }

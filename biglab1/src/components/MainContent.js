@@ -16,7 +16,7 @@ function MainContent(props) {
       <TaskList
         setDone={props.setDone}
         taskList={props.taskList}
-        filter={props.filter}
+        removeTask={props.removeTask}
       ></TaskList>
       <MyForm createElement={props.createElement}></MyForm>
     </Col>

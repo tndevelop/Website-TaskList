@@ -16,37 +16,36 @@ const DummyTaskList = new List();
 DummyTaskList.createElement("laundry", false, true);
 DummyTaskList.createElement("monday lab", false, false, "2021-03-16T09:00:00.000Z");
 DummyTaskList.createElement("phone call", true, false, "2021-03-08T15:20:00.000Z");
-DummyTaskList.createElement("lab", true, false, "2021-04-26T15:20:00.000Z");
+DummyTaskList.createElement("lab", true, false, "2021-05-04T15:20:00.000Z");
 DummyTaskList.createElement("study", false, true, "2021-05-10T15:20:00.000Z");
 
 const filterNames = ["All", "Important", "Today", "Next7", "Private"];
 
 function App() {
-  const [taskList, setTaskList] = useState([...DummyTaskList.getList()]);
+  const [list, setList] = useState(DummyTaskList.getList());//stato per recuperare tutti i task meno quelli cancellati
+  const [taskList, setTaskList] = useState([...list]);
   const [selectedItem, setSelectedItem] = useState("All");
 
   const addElementAndRefresh = (description, isUrgent, isPrivate, deadline) => {
     setTaskList((taskList) => taskList.createElement(description, isUrgent, isPrivate, deadline));
   };
-  debugger;
 
   function filterList(selected) {
-    setTaskList([...DummyTaskList.getList()]);
     switch (selected) {
       case "All":
-        setTaskList((taskList) => taskList.filter( () => true));
+        setTaskList(list.filter( () => true));
         break;
       case "Important":
-        setTaskList((taskList) => taskList.filter((task) => task.isImportant()));
+        setTaskList(list.filter((task) => task.isImportant()));
         break;
       case "Today":
-        setTaskList((taskList) => taskList.filter( (task) => task.isToday()));
+        setTaskList(list.filter( (task) => task.isToday()));
         break;
       case "Next7":
-        setTaskList((taskList) => taskList.filter( (task) => task.isNextWeek()));
+        setTaskList(list.filter( (task) => task.isNextWeek()));
         break;
       case "Private":
-        setTaskList((taskList) => taskList.filter( (task) => task.isPrivate()));
+        setTaskList(list.filter( (task) => task.isPrivate()));
         break;
       default:
         break;
@@ -54,8 +53,13 @@ function App() {
     setSelectedItem(selected);
   }
 
-  const setDone = (id, done) => {
-    taskList.setDone(id, done);
+  const removeTask = (task) => {
+    setTaskList((taskList) => taskList.filter( (t) => t.id!==task.id));
+    setList((list) => list.filter( (t) => t.id!==task.id));
+  }
+
+  const setDone = (task, id, done) => {
+    task.setDone(id, done);
   }
 
   return (
@@ -70,7 +74,7 @@ function App() {
         >
         <ListGroupContainer names={filterNames} selectedItem={selectedItem} chooseFilter={filterList}/>
         </Col>
-        <MainContent setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} filter={filterList}/>
+        <MainContent setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} removeTask={removeTask}/>
       </Row>
     </Container>
   );

@@ -12,6 +12,7 @@ function TaskList(props) {
           <ListGroup.Item key={t.id} index={t.id}>
             <Row>
               <Description
+                task={t}
                 setDone={props.setDone}
                 id={t.id}
                 done={t.done}
@@ -20,7 +21,7 @@ function TaskList(props) {
               />
               <Shared private={t.private}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
-              <Actions task={t}></Actions>
+              <Actions removeTask={props.removeTask} task={t}></Actions>
             </Row>
           </ListGroup.Item>
         );
