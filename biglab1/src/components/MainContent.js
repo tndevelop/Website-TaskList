@@ -1,5 +1,6 @@
 import { Col, Container, Modal, Button, Form } from "react-bootstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { EditingForm } from "./EditingForm";
 import TaskList from "./TaskList";
 import { useState } from "react";
 import dayjs from "dayjs";
@@ -8,16 +9,22 @@ import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 dayjs.extend(isSameOrAfter);
 
 function MainContent(props) {
+  const [showEditingForm, setShowEdingForm] = useState(true);
+
   return (
     <Col as={Container} fluid="xl" className="mainContainer below-nav">
       <h1 id="selectedFilter">
         <b>Filter</b>: {props.selected}
       </h1>
-      <TaskList
-        setDone={props.setDone}
-        taskList={props.taskList}
-        selected={props.selected}
-      ></TaskList>
+      {showEditingForm ? (
+        <EditingForm></EditingForm>
+      ) : (
+        <TaskList
+          setDone={props.setDone}
+          taskList={props.taskList}
+          selected={props.selected}
+        ></TaskList>
+      )}
       <MyForm createElement={props.createElement}></MyForm>
     </Col>
   );
