@@ -64,28 +64,8 @@ function List() {
         else throw new Error('Duplicate id');
     };
 
-    this.filterAll = () => {
-        return this.list.filter( () => true);
-    }
-
-    this.filterByImportant = () => {
-        return this.list.filter((task) => task.isImportant());
-    }
-
-    this.filterByToday = () => {
-        return this.list.filter( (task) => task.isToday() );
-    }
-
-    this.filterByNextWeek = () => {
-        return this.list.filter( (task) => task.isNextWeek() );
-    }
-
-    this.filterByPrivate = () => {
-        return this.list.filter( (task) => task.isPrivate() );
-    }
-
-    this.getList = () => this.list;
-
+    this.getList = () => this.list.filter(t => true);
+    
     this.setDone = (id, done) => {
         this.list.filter((task) => task.id === id )[0].done = done;
     }

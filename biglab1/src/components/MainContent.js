@@ -16,7 +16,7 @@ function MainContent(props) {
       <TaskList
         setDone={props.setDone}
         taskList={props.taskList}
-        selected={props.selected}
+        filter={props.filter}
       ></TaskList>
       <MyForm createElement={props.createElement}></MyForm>
     </Col>
