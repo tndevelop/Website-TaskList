@@ -9,15 +9,15 @@ import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 dayjs.extend(isSameOrAfter);
 
 function MainContent(props) {
-  const [showEditingForm, setShowEdingForm] = useState(true);
+  const [showEditingForm, setShowEdingForm] = useState(false);
 
   return (
     <Col as={Container} fluid="xl" className="mainContainer below-nav">
       <h1 id="selectedFilter">
         <b>Filter</b>: {props.selected}
       </h1>
-      {showEditingForm ? (
-        <EditingForm></EditingForm>
+      {props.showEditingForm ? (
+        <EditingForm taskId = {props.taskId} taskList={props.taskList}></EditingForm>
       ) : (
         <TaskList
           setDone={props.setDone}

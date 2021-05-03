@@ -89,6 +89,10 @@ function List() {
     this.setDone = (id, done) => {
         this.list.filter((task) => task.id === id )[0].done = done;
     }
+
+    this.filterById = (id) => {
+        return this.list.filter( (task) => task.id === id );
+    }
 };
 
 export { Task, List }

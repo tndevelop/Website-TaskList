@@ -13,8 +13,8 @@ function CentralRow(props) {
         >
             <ListGroupContainer names={props.filterNames} selectedItem={props.selectedItem} chooseFilter={props.chooseFilter} />
         </Col>
-        <MainContent setDone={props.setDone} createElement={props.createElement} taskList={props.taskList} selected={props.selectedItem} />
+        <MainContent showEditingForm={props.showEditingForm} taskId = {props.taskId} setDone={props.setDone} createElement={props.createElement} taskList={props.taskList} selected={props.selectedItem} />
     </Row>
     )}
 
-export default CentralRow;
+export { CentralRow };

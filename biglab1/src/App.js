@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import React from "react";
 import { useState } from 'react';
 import "./App.css";
@@ -8,7 +8,8 @@ import MyNavbar from "./components/MyNavbar";
 import './components/TaskList.js';
 import { List } from './TaskListCreate';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import CentralRow from './components/CentralRow';
+import { CentralRow } from './components/CentralRow';
+import { EditingForm } from "./components/EditingForm";
 
 // create the task list and add the dummy tasks
 // id, description, urgent, private, deadline
@@ -42,19 +43,23 @@ function App() {
         <MyNavbar></MyNavbar>
         <Switch>
 
+          <Route exact path="/edit" render={({location}) => 
+            <CentralRow showEditingForm="true" taskId={location.state.taskId} filterNames={filterNames} selectedItem={"All"} chooseFilter={chooseFilter}
+              setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} selected={"All"}>
+            </CentralRow>
 
-          <Route exact path="/:selected" render={({ match }) =>
-            
-              <CentralRow filterNames={filterNames} selectedItem={match.params.selected} chooseFilter={chooseFilter}
-                setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} selected={match.params.selected}>
-              </CentralRow>
-              
           } />
 
-          <Route exact path="/edit" render={() => {
-            return(<></>)
-            
-          }} />
+          <Route exact path="/:selected" render={({ match }) => {
+            console.log(match.params.selected)
+            return (
+              <CentralRow filterNames={filterNames} selectedItem={match.params.selected} chooseFilter={chooseFilter}
+                setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} selected={match.params.selected}>
+              </CentralRow>)
+          }
+          } />
+
+
 
           <Route path="/" render={() =>
             <CentralRow filterNames={filterNames} selectedItem={"All"} chooseFilter={chooseFilter}

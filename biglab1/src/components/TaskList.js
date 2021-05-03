@@ -22,7 +22,7 @@ function TaskList(props) {
               />
               <Shared private={t.private}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
-              <Actions taskList={props.taskList}></Actions>
+              <Actions taskId={2} taskList={props.taskList}></Actions>
             </Row>
           </ListGroup.Item>
         );
