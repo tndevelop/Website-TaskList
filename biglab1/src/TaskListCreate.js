@@ -1,98 +1,137 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
-function Task(id, description, isImportant = false, isPrivate = true, deadline = false) {
-    this.id = id;
-    this.description = description;
-    this.important = isImportant;
-    this.private = isPrivate;
-    this.done = false;
-    // saved as dayjs object
-    if (deadline !== false) {
-        this.deadline = dayjs(deadline);
-    }
-    this._formatDeadline = (format) => {
-        return this.deadline ? this.deadline.format(format) : '<not defined>';
-    }
+function Task(
+  id,
+  description,
+  isImportant = false,
+  isPrivate = true,
+  deadline = false
+) {
+  this.id = id;
+  this.description = description;
+  this.important = isImportant;
+  this.private = isPrivate;
+  this.done = false;
+  // saved as dayjs object
+  if (deadline !== false) {
+    this.deadline = dayjs(deadline);
+  }
+  this._formatDeadline = (format) => {
+    return this.deadline ? this.deadline.format(format) : "<not defined>";
+  };
 
-    //Filters
-    this.isImportant = () => { return this.important; }
+  //Filters
+  this.isImportant = () => {
+    return this.important;
+  };
 
-    this.isPrivate = () => { return this.private; }
+  this.isPrivate = () => {
+    return this.private;
+  };
 
-    this.isToday = () => {
-        const comparisonTemplate = 'YYYY-MM-DD';
-        const now = dayjs();
-        return this.deadline && (this.deadline.format(comparisonTemplate) === now.format(comparisonTemplate));
-    }
+  this.isToday = () => {
+    const comparisonTemplate = "YYYY-MM-DD";
+    const now = dayjs();
+    return (
+      this.deadline &&
+      this.deadline.format(comparisonTemplate) ===
+        now.format(comparisonTemplate)
+    );
+  };
 
-    this.isYesterday = () => {
-        const comparisonTemplate = 'YYYY-MM-DD';
-        const yesterday = dayjs().subtract(1, 'day');
-        return this.deadline && (this.deadline.format(comparisonTemplate) === yesterday.format(comparisonTemplate));
-    }
+  this.isYesterday = () => {
+    const comparisonTemplate = "YYYY-MM-DD";
+    const yesterday = dayjs().subtract(1, "day");
+    return (
+      this.deadline &&
+      this.deadline.format(comparisonTemplate) ===
+        yesterday.format(comparisonTemplate)
+    );
+  };
 
-    this.isTomorrow = () => {
-        const comparisonTemplate = 'YYYY-MM-DD';
-        const tomorrow = dayjs().add(1, 'day');
-        return this.deadline && (this.deadline.format(comparisonTemplate) === tomorrow.format(comparisonTemplate));
-    }
+  this.isTomorrow = () => {
+    const comparisonTemplate = "YYYY-MM-DD";
+    const tomorrow = dayjs().add(1, "day");
+    return (
+      this.deadline &&
+      this.deadline.format(comparisonTemplate) ===
+        tomorrow.format(comparisonTemplate)
+    );
+  };
 
-
-    this.isNextWeek = () => {
-        const tomorrow = dayjs().add(1, 'day');
-        const nextWeek = dayjs().add(7, 'day');
-        const ret = this.deadline && (!this.deadline.isBefore(tomorrow, 'day') && !this.deadline.isAfter(nextWeek, 'day'));
-        return ret;
-    }
+  this.isNextWeek = () => {
+    const tomorrow = dayjs().add(1, "day");
+    const nextWeek = dayjs().add(7, "day");
+    const ret =
+      this.deadline &&
+      !this.deadline.isBefore(tomorrow, "day") &&
+      !this.deadline.isAfter(nextWeek, "day");
+    return ret;
+  };
 }
 
-
 function List() {
-    this.list = [];
-    this.count=0;
+  /**@type {Array<Task>} */
+  this.list = [];
+  this.count = 0;
 
-    this.createElement = (description, isUrgent, isPrivate, deadline) => {
-        const task = new Task(this.count, description, isUrgent, isPrivate, deadline);
-        this.count++;
-        this.add(task);
-        return this;
-    }
+  this.createElement = (description, isUrgent, isPrivate, deadline) => {
+    const task = new Task(
+      this.count,
+      description,
+      isUrgent,
+      isPrivate,
+      deadline
+    );
+    this.count++;
+    this.add(task);
+    return this;
+  };
 
-    this.add = (task) => {
-        if (!this.list.some(t => t.id === task.id))
-            this.list = [...this.list, task];
-        else throw new Error('Duplicate id');
-    };
+  this.modify = (id, description, deadline, isUrgent, isPrivate) => {
+    let found = this.list.findIndex((t) => t.id === id);
+    if (found === -1) return;
+    this.list[found].description = description;
+    this.list[found].deadline = deadline;
+    this.list[found].important = isUrgent;
+    this.list[found].private = isPrivate;
+  };
 
-    this.filterAll = () => {
-        return this.list.filter( () => true);
-    }
+  this.add = (task) => {
+    if (!this.list.some((t) => t.id === task.id))
+      this.list = [...this.list, task];
+    else throw new Error("Duplicate id");
+  };
 
-    this.filterByImportant = () => {
-        return this.list.filter((task) => task.isImportant());
-    }
+  this.filterAll = () => {
+    return this.list.filter(() => true);
+  };
 
-    this.filterByToday = () => {
-        return this.list.filter( (task) => task.isToday() );
-    }
+  this.filterByImportant = () => {
+    return this.list.filter((task) => task.isImportant());
+  };
 
-    this.filterByNextWeek = () => {
-        return this.list.filter( (task) => task.isNextWeek() );
-    }
+  this.filterByToday = () => {
+    return this.list.filter((task) => task.isToday());
+  };
 
-    this.filterByPrivate = () => {
-        return this.list.filter( (task) => task.isPrivate() );
-    }
+  this.filterByNextWeek = () => {
+    return this.list.filter((task) => task.isNextWeek());
+  };
 
-    this.getList = () => this.list;
+  this.filterByPrivate = () => {
+    return this.list.filter((task) => task.isPrivate());
+  };
 
-    this.setDone = (id, done) => {
-        this.list.filter((task) => task.id === id )[0].done = done;
-    }
+  this.getList = () => this.list;
 
-    this.filterById = (id) => {
-        return this.list.filter( (task) => task.id === id );
-    }
-};
+  this.setDone = (id, done) => {
+    this.list.filter((task) => task.id === id)[0].done = done;
+  };
 
-export { Task, List }
+  this.filterById = (id) => {
+    return this.list.filter((task) => task.id === id);
+  };
+}
+
+export { Task, List };

@@ -1,40 +1,131 @@
 import { useState } from "react";
-import { Col, Button, Form } from "react-bootstrap";
+import { Col, Container, Modal, Button, Form } from "react-bootstrap";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { EditingForm } from "./EditingForm";
+import TaskList from "./TaskList";
+import dayjs from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
-function EditingForm(props) {
-  
-  let task = props.taskList.filterById(props.taskId)[0];
-  
+dayjs.extend(isSameOrAfter);
+
+function AddEditForm(props) {
+  //State to show modal
+  const [hidden, setHidden] = useState(true);
+  //Task paramaters
+  const [date, setDate] = useState(
+    props.task ? (props.task.deadline ? props.task.deadline : dayjs()) : dayjs()
+  );
+  const [description, setDescription] = useState(
+    props.task ? props.task.description : ""
+  );
+  const [isUrgent, setUrgent] = useState(
+    props.task ? props.task.urgent : false
+  );
+  const [isPrivate, setPrivate] = useState(
+    props.task ? props.task.private : true
+  );
+
+  //Validate form
+  const validDescription = () => {
+    return description.length !== 0 && description.search(/^\s+$/gm) === -1;
+  };
+  const validDeadline = () => {
+    return date ? date.isSameOrAfter(dayjs(), "day") : false;
+  };
+
+  //Actions
+  const submitChanges = (event) => {
+    event.preventDefault();
+    if (!validDescription() || !validDeadline()) return;
+
+    if (!props.task)
+      props.createElement(description, isUrgent, isPrivate, date);
+    else props.modify(props.task.id, description, date, isUrgent, isPrivate);
+    resetFormFields();
+    setHidden(true);
+  };
+  const resetFormFields = () => {
+    setDate(dayjs());
+    setDescription("");
+    setUrgent(false);
+    setPrivate(true);
+  };
+  const hideAndReset = () => {
+    setHidden(true);
+    resetFormFields();
+  };
+
   return (
-    <Form>
-      <Form.Row>
-        <Col>
-          <Form.Label>Description </Form.Label>
-          <Form.Control type="text" value={task.description}></Form.Control>
-        </Col>
-      </Form.Row>
-      <Form.Row>
-        <Col>
-          <Form.Label>Deadline</Form.Label>
-          <Form.Control type="date" value={task.deadline.format('YYYY-MM-DD')}></Form.Control>
-        </Col>
-      </Form.Row>
-      <Form.Row className="py-3">
-        <Col>
-          <Form.Check checked={task.private} inline label="Private"></Form.Check>
-        </Col>
-        <Col>
-          <Form.Check checked={task.important} inline label="Urgent"></Form.Check>
-        </Col>
-      </Form.Row>
-      <Button type="submit" variant="primary">
-        Done
-      </Button>
-      <Button type="cancel" variant="danger">
-        Cancel
-      </Button>
-    </Form>
+    <>
+      <AiFillPlusCircle
+        className="plusButton"
+        color="green"
+        onClick={() => setHidden(false)}
+      ></AiFillPlusCircle>
+
+      <Modal animation={false} show={!hidden} onHide={() => setHidden(true)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Insert Task</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="selectedTask">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Description"
+                isInvalid={!validDescription()}
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="selectedDate">
+              <Form.Label>Date</Form.Label>
+              <Form.Control
+                isInvalid={!validDeadline()}
+                type="date"
+                value={date.format("YYYY-MM-DD")}
+                onChange={(event) => setDate(dayjs(event.target.value))}
+              />
+              <Form.Control.Feedback type="invalid">
+                Date must be today or after
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicCheckbox">
+              <Form.Check
+                inline
+                type="checkbox"
+                checked={isPrivate}
+                label="is private?"
+                id="checkPrivate"
+                onChange={(event) => setPrivate(event.target.checked)}
+              />
+              <Form.Check
+                inline
+                type="checkbox"
+                checked={isUrgent}
+                label="is urgent?"
+                id="checkUrgent"
+                onChange={(event) => setUrgent(event.target.checked)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button onClick={hideAndReset} variant="secondary">
+            Close
+          </Button>
+          <Button onClick={submitChanges} variant="primary">
+            Save changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 
-export { EditingForm };
+export { AddEditForm };
