@@ -5,7 +5,7 @@ import TaskList from "./TaskList";
 import { useState } from "react";
 
 function MainContent(props) {
-  const [taskToModify, setTaskToModify] = useState(props.taskList.getList()[0]);
+  const [taskToModify, setTaskToModify] = useState(undefined);
   return (
     <Col as={Container} fluid="xl" className="mainContainer below-nav">
       <h1 id="selectedFilter">
@@ -20,7 +20,7 @@ function MainContent(props) {
       <AddEditForm
         createElement={props.createElement}
         task={taskToModify}
-        modify={props.modify}
+        delete={props.delete}
       ></AddEditForm>
     </Col>
   );

@@ -88,15 +88,6 @@ function List() {
     return this;
   };
 
-  this.modify = (id, description, deadline, isUrgent, isPrivate) => {
-    let found = this.list.findIndex((t) => t.id === id);
-    if (found === -1) return;
-    this.list[found].description = description;
-    this.list[found].deadline = deadline;
-    this.list[found].important = isUrgent;
-    this.list[found].private = isPrivate;
-  };
-
   this.add = (task) => {
     if (!this.list.some((t) => t.id === task.id))
       this.list = [...this.list, task];

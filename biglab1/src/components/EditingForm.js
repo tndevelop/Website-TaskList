@@ -40,7 +40,10 @@ function AddEditForm(props) {
 
     if (!props.task)
       props.createElement(description, isUrgent, isPrivate, date);
-    else props.modify(props.task.id, description, date, isUrgent, isPrivate);
+    else {
+      props.delete(props.task.id);
+      props.createElement(description, date, isUrgent, isPrivate);
+    }
     resetFormFields();
     setHidden(true);
   };
