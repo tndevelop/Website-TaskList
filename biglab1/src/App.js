@@ -33,14 +33,14 @@ DummyTaskList.createElement("study", false, true, "2021-05-10T15:20:00.000Z");
 const filterNames = ["All", "Important", "Today", "Next7", "Private"];
 
 function App() {
-  const [list, setList] = useState(DummyTaskList.getList()); //stato per recuperare tutti i task meno quelli cancellati
-  const [taskList, setTaskList] = useState([...list]);
+  const [taskList, setTaskList] = useState(DummyTaskList.getList());
   const [selectedItem, setSelectedItem] = useState("All");
   const [addedTask, setAddedTask] = useState(false);
   const [filter, chooseFilter] = useState("All");
 
   const addElementAndRefresh = (description, isUrgent, isPrivate, deadline) => {
     DummyTaskList.createElement(description, isUrgent, isPrivate, deadline);
+    setTaskList(DummyTaskList.getList());
     setAddedTask(!addedTask);
   };
 
@@ -49,8 +49,8 @@ function App() {
   };
 
   const removeTask = (task) => {
+    DummyTaskList.remove(task);
     setTaskList((taskList) => taskList.filter((t) => t.id !== task.id));
-    setList((list) => list.filter((t) => t.id !== task.id));
   };
 
   return (

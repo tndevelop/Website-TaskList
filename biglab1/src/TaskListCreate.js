@@ -97,6 +97,11 @@ function List() {
     else throw new Error("Duplicate id");
   };
 
+  this.remove = (task) => {
+    this.list = this.list.filter((t) => t.id !== task.id);
+  };
+  
+
   this.getList = () => this.list.filter((t) => true);
 }
 
