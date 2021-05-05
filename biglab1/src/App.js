@@ -9,7 +9,6 @@ import "./components/TaskList.js";
 import { List } from "./TaskListCreate";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { CentralRow } from "./components/CentralRow";
-import { EditingForm } from "./components/EditingForm";
 
 // create the task list and add the dummy tasks
 // id, description, urgent, private, deadline
@@ -19,16 +18,16 @@ DummyTaskList.createElement(
   "monday lab",
   false,
   false,
-  "2021-03-16T09:00:00.000Z"
+  "2021-06-16T09:00:00.000Z"
 );
 DummyTaskList.createElement(
   "phone call",
   true,
   false,
-  "2021-03-08T15:20:00.000Z"
+  "2021-06-08T15:20:00.000Z"
 );
-DummyTaskList.createElement("lab", true, false, "2021-05-04T15:20:00.000Z");
-DummyTaskList.createElement("study", false, true, "2021-05-10T15:20:00.000Z");
+DummyTaskList.createElement("lab", true, false, "2021-07-04T15:20:00.000Z");
+DummyTaskList.createElement("study", false, true, "2021-07-10T15:20:00.000Z");
 
 function App() {
   const [taskList, setTaskList] = useState(DummyTaskList.getList());
@@ -77,12 +76,11 @@ function App() {
               <CentralRow
                 showEditingForm="true"
                 taskId={location.state.taskId}
-                selectedFilter={"All"}
+                selectedFilter={filter}
                 setFilter={setFilter}
                 setDone={setDone}
                 createElement={addElementAndRefresh}
                 taskList={applyFilter(filter)}
-                setDone={setDone}
                 removeTask={removeTask}
               ></CentralRow>
             )}
@@ -91,6 +89,7 @@ function App() {
             exact
             path="/:selectedFilter"
             render={({ match }) => {
+              //setFilter(match.params.selectedFilter);//test
               return (
                 <CentralRow
                   selectedFilter={match.params.selectedFilter}
@@ -98,7 +97,6 @@ function App() {
                   setDone={setDone}
                   createElement={addElementAndRefresh}
                   taskList={applyFilter(filter)}
-                  setDone={setDone}
                   removeTask={removeTask}
                 ></CentralRow>
               );
@@ -114,7 +112,6 @@ function App() {
                 setDone={setDone}
                 createElement={addElementAndRefresh}
                 taskList={applyFilter(filter)}
-                setDone={setDone}
                 removeTask={removeTask}
               ></CentralRow>
             )}

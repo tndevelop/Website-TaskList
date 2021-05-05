@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Col, Container, Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
 dayjs.extend(isSameOrAfter);
-
 function AddEditForm(props) {
   //Task paramaters
   const [date, setDate] = useState(props.task ? props.task.deadline : dayjs());
@@ -23,7 +22,8 @@ function AddEditForm(props) {
     return description.length !== 0 && description.search(/^\s+$/gm) === -1;
   };
   const validDeadline = () => {
-    return date ? date.isSameOrAfter(dayjs(), "day") : false;
+    return date ? date.isSameOrAfter(dayjs(), "day") : true;
+    //return true;
   };
 
   //Actions
@@ -68,8 +68,11 @@ function AddEditForm(props) {
               <Form.Control
                 isInvalid={!validDeadline()}
                 type="date"
-                value={date.format("YYYY-MM-DD")}
-                onChange={(event) => setDate(dayjs(event.target.value))}
+                value={date ? date.format("YYYY-MM-DD") : ""}
+                //value={date.format("YYYY-MM-DD")}
+                //PROVA senza data
+                onChange={(event) => event.target.value ? setDate(dayjs(event.target.value)) : setDate("") }
+                //onChange={(event) => setDate(dayjs(event.target.value))}
               />
               <Form.Control.Feedback type="invalid">
                 Date must be today or after
@@ -93,6 +96,7 @@ function AddEditForm(props) {
                 id="checkUrgent"
                 onChange={(event) => setUrgent(event.target.checked)}
               />
+              
             </Form.Group>
           </Form>
         </Modal.Body>

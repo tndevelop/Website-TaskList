@@ -13,7 +13,7 @@ function Task(
   this.private = isPrivate;
   this.done = false;
   // saved as dayjs object
-  if (deadline !== false) {
+  if (deadline !== false && deadline !== "") {
     this.deadline = dayjs(deadline);
   }
   this._formatDeadline = (format) => {

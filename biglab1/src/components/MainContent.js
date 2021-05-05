@@ -1,4 +1,4 @@
-import { Col, Container, Modal, Button, Form } from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AddEditForm } from "./EditingForm";
 import TaskList from "./TaskList";
