@@ -25,13 +25,16 @@ function MainContent(props) {
         setTaskToModify={modifyTask}
         removeTask={props.removeTask}
       ></TaskList>
+
       <AiFillPlusCircle
         className="plusButton"
         color="green"
         onClick={() => {
+          setTaskToModify(undefined);
           setHideForm(false);
         }}
       ></AiFillPlusCircle>
+
       {hideForm ? (
         ""
       ) : (
@@ -39,7 +42,7 @@ function MainContent(props) {
           createElement={props.createElement}
           task={taskToModify}
           hideForm={hideForm}
-          setHideForm={(val) => setHideForm(val)}
+          setHideForm={setHideForm}
           delete={props.removeTask}
         ></AddEditForm>
       )}

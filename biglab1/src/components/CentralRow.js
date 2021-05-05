@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-import { ListGroupContainer } from "./MySide.js";
+import { FilterList } from "./MySide.js";
 import MainContent from "./MainContent";
 
 function CentralRow(props) {
@@ -11,10 +11,9 @@ function CentralRow(props) {
         className="vheight-100 bg-light below-nav sidebar-left-padding d-sm-block collapse"
         id="left-sidebar"
       >
-        <ListGroupContainer
-          names={props.filterNames}
-          selectedItem={props.selectedItem}
-          chooseFilter={props.chooseFilter}
+        <FilterList
+          selectedFilter={props.selectedFilter}
+          setFilter={props.setFilter}
         />
       </Col>
       <MainContent
@@ -24,7 +23,7 @@ function CentralRow(props) {
         createElement={props.createElement}
         delete={props.delete}
         taskList={props.taskList}
-        selected={props.selectedItem}
+        selected={props.selectedFilter}
         setDone={props.setDone}
         removeTask={props.removeTask}
       />

@@ -30,12 +30,11 @@ function AddEditForm(props) {
   const submitChanges = (event) => {
     event.preventDefault();
     if (!validDescription() || !validDeadline()) return;
-
     if (!props.task)
       props.createElement(description, isUrgent, isPrivate, date);
     else {
       props.delete(props.task);
-      props.createElement(description, date, isUrgent, isPrivate);
+      props.createElement(description, isUrgent, isPrivate, date);
     }
     props.setHideForm(true);
   };

@@ -30,13 +30,10 @@ DummyTaskList.createElement(
 DummyTaskList.createElement("lab", true, false, "2021-05-04T15:20:00.000Z");
 DummyTaskList.createElement("study", false, true, "2021-05-10T15:20:00.000Z");
 
-const filterNames = ["All", "Important", "Today", "Next7", "Private"];
-
 function App() {
   const [taskList, setTaskList] = useState(DummyTaskList.getList());
-  const [selectedItem, setSelectedItem] = useState("All");
   const [addedTask, setAddedTask] = useState(false);
-  const [filter, chooseFilter] = useState("All");
+  const [filter, setFilter] = useState("All");
 
   const addElementAndRefresh = (description, isUrgent, isPrivate, deadline) => {
     DummyTaskList.createElement(description, isUrgent, isPrivate, deadline);
@@ -53,6 +50,21 @@ function App() {
     setTaskList((taskList) => taskList.filter((t) => t.id !== task.id));
   };
 
+  const applyFilter = (filterName) => {
+    switch (filterName) {
+      case "Private":
+        return taskList.filter((t) => t.isPrivate());
+      case "Important":
+        return taskList.filter((t) => t.isImportant());
+      case "Next7":
+        return taskList.filter((t) => t.isNextWeek());
+      case "Today":
+        return taskList.filter((t) => t.isToday());
+      default:
+        return taskList;
+    }
+  };
+
   return (
     <Router>
       <Container fluid="true">
@@ -65,51 +77,43 @@ function App() {
               <CentralRow
                 showEditingForm="true"
                 taskId={location.state.taskId}
-                filterNames={filterNames}
-                selectedItem={"All"}
-                chooseFilter={chooseFilter}
+                selectedFilter={"All"}
+                setFilter={setFilter}
                 setDone={setDone}
                 createElement={addElementAndRefresh}
-                taskList={taskList}
-                selected={"All"}
+                taskList={applyFilter(filter)}
                 setDone={setDone}
                 removeTask={removeTask}
               ></CentralRow>
             )}
           />
-
           <Route
             exact
-            path="/:selected"
+            path="/:selectedFilter"
             render={({ match }) => {
-              console.log(match.params.selected);
               return (
                 <CentralRow
-                  filterNames={filterNames}
-                  selectedItem={match.params.selected}
-                  chooseFilter={chooseFilter}
+                  selectedFilter={match.params.selectedFilter}
+                  setFilter={setFilter}
                   setDone={setDone}
                   createElement={addElementAndRefresh}
-                  taskList={taskList}
-                  selected={match.params.selected}
+                  taskList={applyFilter(filter)}
                   setDone={setDone}
                   removeTask={removeTask}
                 ></CentralRow>
               );
             }}
           />
-
           <Route
+            exact
             path="/"
             render={() => (
               <CentralRow
-                filterNames={filterNames}
-                selectedItem={"All"}
-                /*chooseFilter={chooseFilter}*/
+                selectedFilter={"All"}
+                setFilter={setFilter}
                 setDone={setDone}
                 createElement={addElementAndRefresh}
-                taskList={taskList}
-                selected={"All"}
+                taskList={applyFilter(filter)}
                 setDone={setDone}
                 removeTask={removeTask}
               ></CentralRow>
@@ -118,26 +122,6 @@ function App() {
         </Switch>
       </Container>
     </Router>
-    /*
-    setTaskList((taskList) => taskList.createElement(description, isUrgent, isPrivate, deadline));
-  };
-
-  return (
-    <Container fluid="true">
-      <MyNavbar></MyNavbar>
-      <Row>
-        <Col
-          sm={3}
-          xs={12}
-          className="vheight-100 bg-light below-nav sidebar-left-padding d-sm-block collapse"
-          id="left-sidebar"
-        >
-        <ListGroupContainer names={filterNames} selectedItem={selectedItem} chooseFilter={filterList}/>
-        </Col>
-        <MainContent setDone={setDone} createElement={addElementAndRefresh} taskList={taskList} removeTask={removeTask}/>
-      </Row>
-    </Container>
-*/
   );
 }
 

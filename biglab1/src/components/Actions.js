@@ -16,13 +16,10 @@ function Actions(props) {
             state: { taskId: props.taskId },
           }}
         >
-          {" "}
           <FaPencilAlt
             className="pencil"
-            onClick={() => {
-              props.setTaskToModify(props.task);
-            }}
-          ></FaPencilAlt>{" "}
+            onClick={() => props.setTaskToModify(props.task)}
+          ></FaPencilAlt>
         </Link>
       </Col>
       <Col sm={0.5}>
