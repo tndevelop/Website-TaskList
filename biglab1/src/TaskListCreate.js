@@ -68,10 +68,13 @@ function Task(
       !this.deadline.isAfter(nextWeek, "day");
     return ret;
   };
+
+  this.setDone = (id, done) => {
+    this.done = done;
+  };
 }
 
 function List() {
-  /**@type {Array<Task>} */
   this.list = [];
   this.count = 0;
 
@@ -94,35 +97,7 @@ function List() {
     else throw new Error("Duplicate id");
   };
 
-  this.filterAll = () => {
-    return this.list.filter(() => true);
-  };
-
-  this.filterByImportant = () => {
-    return this.list.filter((task) => task.isImportant());
-  };
-
-  this.filterByToday = () => {
-    return this.list.filter((task) => task.isToday());
-  };
-
-  this.filterByNextWeek = () => {
-    return this.list.filter((task) => task.isNextWeek());
-  };
-
-  this.filterByPrivate = () => {
-    return this.list.filter((task) => task.isPrivate());
-  };
-
-  this.getList = () => this.list;
-
-  this.setDone = (id, done) => {
-    this.list.filter((task) => task.id === id)[0].done = done;
-  };
-
-  this.filterById = (id) => {
-    return this.list.filter((task) => task.id === id);
-  };
+  this.getList = () => this.list.filter((t) => true);
 }
 
 export { Task, List };

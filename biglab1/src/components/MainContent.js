@@ -16,6 +16,7 @@ function MainContent(props) {
         taskList={props.taskList}
         selected={props.selected}
         setTaskToModify={(task) => setTaskToModify(task)}
+        removeTask={props.removeTask}
       ></TaskList>
       <AddEditForm
         createElement={props.createElement}

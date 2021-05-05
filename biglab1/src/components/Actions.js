@@ -16,7 +16,7 @@ function Actions(props) {
       }}> <FaPencilAlt className="pencil" action={props.modify}></FaPencilAlt> </Link>
       </Col>
       <Col sm={0.5}>
-        <FaTrashAlt className="trash" action={props.remove}></FaTrashAlt>
+        <FaTrashAlt className="trash" onClick={() => props.removeTask(props.task)}></FaTrashAlt>
       </Col>
     </>
   );
