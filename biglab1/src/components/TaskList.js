@@ -21,7 +21,11 @@ function TaskList(props) {
               />
               <Shared private={t.private}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
-              <Actions removeTask={props.removeTask} task={t}></Actions>
+              <Actions
+                removeTask={props.removeTask}
+                setTaskToModify={props.setTaskToModify}
+                task={t}
+              ></Actions>
             </Row>
           </ListGroup.Item>
         );

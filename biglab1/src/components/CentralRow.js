@@ -25,6 +25,8 @@ function CentralRow(props) {
         delete={props.delete}
         taskList={props.taskList}
         selected={props.selectedItem}
+        setDone={props.setDone}
+        removeTask={props.removeTask}
       />
     </Row>
   );

@@ -1,25 +1,18 @@
 import { useState } from "react";
 import { Col, Container, Modal, Button, Form } from "react-bootstrap";
-import { AiFillPlusCircle } from "react-icons/ai";
-import { EditingForm } from "./EditingForm";
-import TaskList from "./TaskList";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
 dayjs.extend(isSameOrAfter);
 
 function AddEditForm(props) {
-  //State to show modal
-  const [hidden, setHidden] = useState(true);
   //Task paramaters
-  const [date, setDate] = useState(
-    props.task ? (props.task.deadline ? props.task.deadline : dayjs()) : dayjs()
-  );
+  const [date, setDate] = useState(props.task ? props.task.deadline : dayjs());
   const [description, setDescription] = useState(
     props.task ? props.task.description : ""
   );
   const [isUrgent, setUrgent] = useState(
-    props.task ? props.task.urgent : false
+    props.task ? props.task.important : false
   );
   const [isPrivate, setPrivate] = useState(
     props.task ? props.task.private : true
@@ -41,32 +34,19 @@ function AddEditForm(props) {
     if (!props.task)
       props.createElement(description, isUrgent, isPrivate, date);
     else {
-      props.delete(props.task.id);
+      props.delete(props.task);
       props.createElement(description, date, isUrgent, isPrivate);
     }
-    resetFormFields();
-    setHidden(true);
-  };
-  const resetFormFields = () => {
-    setDate(dayjs());
-    setDescription("");
-    setUrgent(false);
-    setPrivate(true);
-  };
-  const hideAndReset = () => {
-    setHidden(true);
-    resetFormFields();
+    props.setHideForm(true);
   };
 
   return (
     <>
-      <AiFillPlusCircle
-        className="plusButton"
-        color="green"
-        onClick={() => setHidden(false)}
-      ></AiFillPlusCircle>
-
-      <Modal animation={false} show={!hidden} onHide={() => setHidden(true)}>
+      <Modal
+        animation={false}
+        show={!props.hideForm}
+        onHide={() => props.setHideForm(true)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Insert Task</Modal.Title>
         </Modal.Header>
@@ -119,7 +99,7 @@ function AddEditForm(props) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={hideAndReset} variant="secondary">
+          <Button onClick={() => props.setHideForm(true)} variant="secondary">
             Close
           </Button>
           <Button onClick={submitChanges} variant="primary">

@@ -36,14 +36,21 @@ function App() {
   const [list, setList] = useState(DummyTaskList.getList()); //stato per recuperare tutti i task meno quelli cancellati
   const [taskList, setTaskList] = useState([...list]);
   const [selectedItem, setSelectedItem] = useState("All");
+  const [addedTask, setAddedTask] = useState(false);
+  const [filter, chooseFilter] = useState("All");
 
   const addElementAndRefresh = (description, isUrgent, isPrivate, deadline) => {
-    taskList.createElement(description, isUrgent, isPrivate, deadline);
+    DummyTaskList.createElement(description, isUrgent, isPrivate, deadline);
     setAddedTask(!addedTask);
   };
 
-  const setDone = (id, done) => {
-    taskList.setDone(id, done);
+  const setDone = (task, id, done) => {
+    task.setDone(id, done);
+  };
+
+  const removeTask = (task) => {
+    setTaskList((taskList) => taskList.filter((t) => t.id !== task.id));
+    setList((list) => list.filter((t) => t.id !== task.id));
   };
 
   return (
@@ -65,6 +72,8 @@ function App() {
                 createElement={addElementAndRefresh}
                 taskList={taskList}
                 selected={"All"}
+                setDone={setDone}
+                removeTask={removeTask}
               ></CentralRow>
             )}
           />
@@ -83,6 +92,8 @@ function App() {
                   createElement={addElementAndRefresh}
                   taskList={taskList}
                   selected={match.params.selected}
+                  setDone={setDone}
+                  removeTask={removeTask}
                 ></CentralRow>
               );
             }}
@@ -94,11 +105,13 @@ function App() {
               <CentralRow
                 filterNames={filterNames}
                 selectedItem={"All"}
-                chooseFilter={chooseFilter}
+                /*chooseFilter={chooseFilter}*/
                 setDone={setDone}
                 createElement={addElementAndRefresh}
                 taskList={taskList}
                 selected={"All"}
+                setDone={setDone}
+                removeTask={removeTask}
               ></CentralRow>
             )}
           />
@@ -108,38 +121,6 @@ function App() {
     /*
     setTaskList((taskList) => taskList.createElement(description, isUrgent, isPrivate, deadline));
   };
-
-  function filterList(selected) {
-    switch (selected) {
-      case "All":
-        setTaskList(list.filter( () => true));
-        break;
-      case "Important":
-        setTaskList(list.filter((task) => task.isImportant()));
-        break;
-      case "Today":
-        setTaskList(list.filter( (task) => task.isToday()));
-        break;
-      case "Next7":
-        setTaskList(list.filter( (task) => task.isNextWeek()));
-        break;
-      case "Private":
-        setTaskList(list.filter( (task) => task.isPrivate()));
-        break;
-      default:
-        break;
-    }
-    setSelectedItem(selected);
-  }
-
-  const removeTask = (task) => {
-    setTaskList((taskList) => taskList.filter( (t) => t.id!==task.id));
-    setList((list) => list.filter( (t) => t.id!==task.id));
-  }
-
-  const setDone = (task, id, done) => {
-    task.setDone(id, done);
-  }
 
   return (
     <Container fluid="true">

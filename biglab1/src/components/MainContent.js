@@ -6,6 +6,13 @@ import { useState } from "react";
 
 function MainContent(props) {
   const [taskToModify, setTaskToModify] = useState(undefined);
+  const [hideForm, setHideForm] = useState(true);
+
+  const modifyTask = (task) => {
+    setTaskToModify(task);
+    setHideForm(false);
+  };
+
   return (
     <Col as={Container} fluid="xl" className="mainContainer below-nav">
       <h1 id="selectedFilter">
@@ -15,14 +22,27 @@ function MainContent(props) {
         setDone={props.setDone}
         taskList={props.taskList}
         selected={props.selected}
-        setTaskToModify={(task) => setTaskToModify(task)}
+        setTaskToModify={modifyTask}
         removeTask={props.removeTask}
       ></TaskList>
-      <AddEditForm
-        createElement={props.createElement}
-        task={taskToModify}
-        delete={props.delete}
-      ></AddEditForm>
+      <AiFillPlusCircle
+        className="plusButton"
+        color="green"
+        onClick={() => {
+          setHideForm(false);
+        }}
+      ></AiFillPlusCircle>
+      {hideForm ? (
+        ""
+      ) : (
+        <AddEditForm
+          createElement={props.createElement}
+          task={taskToModify}
+          hideForm={hideForm}
+          setHideForm={(val) => setHideForm(val)}
+          delete={props.removeTask}
+        ></AddEditForm>
+      )}
     </Col>
   );
 }
