@@ -12,7 +12,7 @@ function FilterList(props) {
             name={name}
             index={index}
             key={index}
-            selectedFilter={name === props.selectedItem}
+            selectedFilter={name === props.selectedFilter}
             setFilter={props.setFilter}
           />
         </Link>
@@ -22,7 +22,7 @@ function FilterList(props) {
 }
 
 function ItemSide(props) {
-  return props.selected ? (
+  return props.selectedFilter ? (
     <ListGroup.Item action active>
       {props.name}
     </ListGroup.Item>
