@@ -11,11 +11,21 @@ function TaskList(props) {
         return (
           <ListGroup.Item key={index} index={index}>
             <Row>
-              <Description urgent={t.urgent} description={t.description} />
-
-              {t.private ? <Private></Private> : false}
+              <Description
+                task={t}
+                setDone={props.setDone}
+                id={t.id}
+                done={t.done}
+                important={t.important}
+                description={t.description}
+              />
+              <Shared private={t.private}></Shared>
               <Deadline deadline={t.deadline}></Deadline>
-              <Actions taskList={props.taskList}></Actions>
+              <Actions
+                removeTask={props.removeTask}
+                setTaskToModify={props.setTaskToModify}
+                task={t}
+              ></Actions>
             </Row>
           </ListGroup.Item>
         );
