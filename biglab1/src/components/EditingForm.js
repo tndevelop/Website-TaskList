@@ -17,7 +17,10 @@ function AddEditForm(props) {
     props.task ? props.task.private : true
   );
 
-  //Validate form
+  /**
+   * Check if description is not empty (only whitespaces not allowed)
+   * @returns {boolean}
+   */
   const validDescription = () => {
     return description.length !== 0 && description.search(/^\s+$/gm) === -1;
   };
@@ -25,7 +28,10 @@ function AddEditForm(props) {
     return date ? date.isSameOrAfter(dayjs(), "day") : true;
   };
 
-  //Actions
+  /**
+   * Check if fields are valid and submit changes to `taskList`
+   * @param {*} event
+   */
   const submitChanges = (event) => {
     event.preventDefault();
     if (!validDescription() || !validDeadline()) return;
@@ -68,10 +74,11 @@ function AddEditForm(props) {
                 isInvalid={!validDeadline()}
                 type="date"
                 value={date ? date.format("YYYY-MM-DD") : ""}
-                //value={date.format("YYYY-MM-DD")}
-                //PROVA senza data
-                onChange={(event) => event.target.value ? setDate(dayjs(event.target.value)) : setDate("") }
-                //onChange={(event) => setDate(dayjs(event.target.value))}
+                onChange={(event) =>
+                  event.target.value
+                    ? setDate(dayjs(event.target.value))
+                    : setDate("")
+                }
               />
               <Form.Control.Feedback type="invalid">
                 Date must be today or after
@@ -95,7 +102,6 @@ function AddEditForm(props) {
                 id="checkUrgent"
                 onChange={(event) => setUrgent(event.target.checked)}
               />
-              
             </Form.Group>
           </Form>
         </Modal.Body>

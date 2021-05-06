@@ -48,7 +48,11 @@ function App() {
     DummyTaskList.remove(task);
     setTaskList((taskList) => taskList.filter((t) => t.id !== task.id));
   };
-
+  /**
+   * Apply filter to `taskList`
+   * @param {string} filterName
+   * @returns {Array<Task>} filtered list
+   */
   const applyFilter = (filterName) => {
     switch (filterName) {
       case "Private":
