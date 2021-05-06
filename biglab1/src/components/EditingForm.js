@@ -23,7 +23,6 @@ function AddEditForm(props) {
   };
   const validDeadline = () => {
     return date ? date.isSameOrAfter(dayjs(), "day") : true;
-    //return true;
   };
 
   //Actions

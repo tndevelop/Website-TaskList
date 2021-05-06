@@ -71,32 +71,15 @@ function App() {
         <Switch>
           <Route
             exact
-            path="/edit"
-            render={({ location }) => (
-              <CentralRow
-                showEditingForm="true"
-                taskId={location.state.taskId}
-                selectedFilter={filter}
-                setFilter={setFilter}
-                setDone={setDone}
-                createElement={addElementAndRefresh}
-                taskList={applyFilter(filter)}
-                removeTask={removeTask}
-              ></CentralRow>
-            )}
-          />
-          <Route
-            exact
             path="/:selectedFilter"
             render={({ match }) => {
-              //setFilter(match.params.selectedFilter);//test
               return (
                 <CentralRow
                   selectedFilter={match.params.selectedFilter}
                   setFilter={setFilter}
                   setDone={setDone}
                   createElement={addElementAndRefresh}
-                  taskList={applyFilter(filter)}
+                  taskList={applyFilter(match.params.selectedFilter)}
                   removeTask={removeTask}
                 ></CentralRow>
               );
@@ -113,6 +96,8 @@ function App() {
                 createElement={addElementAndRefresh}
                 taskList={applyFilter(filter)}
                 removeTask={removeTask}
+                //setEditForm={setEditForm}//test
+                //showEditingForm={editForm}//test
               ></CentralRow>
             )}
           />
